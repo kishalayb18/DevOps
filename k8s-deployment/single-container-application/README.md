@@ -7,7 +7,8 @@ _____________________________________
 
 ## minikube Commands
 ```
-start minikube --vm-driver=virualbox #for the first time
+#for the first time
+start minikube --vm-driver=virualbox 
 
 minikube start #to resume minikube
 
@@ -15,7 +16,9 @@ minikube status
 
 minikube stop
 
-minikube delete #need not to use this command if you want to resume minikube later
+#need not to use this command if you want to resume minikube later
+minikube delete 
+
 ```
 
 ## Files Required
@@ -41,7 +44,7 @@ kubectl get deployment -n sample
 
 kubectl apply -f service.yaml -n sample
 
-kubectl get pods -n sample
+kubectl get pods -o watch -n sample
 
 kubectl get all -n sample
 
