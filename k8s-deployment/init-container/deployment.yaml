@@ -1,0 +1,147 @@
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: test-init-deployment
+# spec:
+#   selector:
+#     matchLabels:
+#       app: sample-app
+#   replicas: 1
+#   template:
+#     metadata:
+#       labels:
+#         app: sample-app
+#     spec:
+#       volumes:
+#       - name: model-volume
+#         emptyDir: {}
+#       initContainers:
+#       - name: sample-init-container
+#         image: nginx
+#         imagePullPolicy: Always
+#         command: ["/bin/sh"]
+#         #args: ["-c", "cp /usr/src/d2v_model/* /models"]
+#         volumeMounts:
+#         - name: model-volume
+#           mountPath: "/models"
+#       containers:
+#       - name: sample-app-main
+#         image: nginx
+#         imagePullPolicy: Always
+#         #command: ["python", "./main.py"]
+#         livenessProbe:
+#           httpGet:
+#             path: /
+#             port: 8000
+#             scheme: HTTP
+#           initialDelaySeconds: 5
+#           timeoutSeconds: 5
+#           periodSeconds: 5
+#           successThreshold: 1
+#           failureThreshold: 2
+#         readinessProbe:
+#           httpGet:
+#             path: /
+#             port: 8000
+#             scheme: HTTP
+#           initialDelaySeconds: 5
+#           timeoutSeconds: 5
+#           periodSeconds: 5
+#           successThreshold: 1
+#           failureThreshold: 2
+#         ports:
+#         - name: test-port
+#           containerPort: 8000
+#         volumeMounts:
+#         - name: model-volume
+#           mountPath: /usr/src/app/models
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-init-deployment
+spec:
+  initContainers:
+  - name: test-init
+    image: alpine
+    command:
+      - sh
+      - "-c"
+      - |
+      - echo "----------------------------- this is my test-init container --------------------------------"
+      - echo ----------------------------- this is my test-init container v2--------------------------------
+      - echo '----------------------------- this is my test-init container v3--------------------------------'
+
+  - name: test-init-2
+    image: nginx
+    command:
+      - sh
+      - "-c"
+      - |
+      - echo "--------- hiiiiiii ----------"
+
+    
+  containers:
+  - name: sample-container
+    image: nginx
+
+
+
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: test-init-deployment
+# spec:
+#   selector:
+#     matchLabels:
+#       app: sample-app
+#   replicas: 1
+#   template:
+#     metadata:
+#       labels:
+#         app: sample-app
+#     spec:
+#       volumes:
+#       - name: model-volume
+#         emptyDir: {}
+#       initContainers:
+#       - name: sample-init-container
+#         image: nginx
+#         imagePullPolicy: Always
+#         command: ["/bin/sh"]
+#         #args: ["-c", "cp /usr/src/d2v_model/* /models"]
+#         volumeMounts:
+#         - name: model-volume
+#           mountPath: "/models"
+#       containers:
+#       - name: sample-app-main
+#         image: nginx
+#         imagePullPolicy: Always
+#         #command: ["python", "./main.py"]
+#         livenessProbe:
+#           httpGet:
+#             path: /
+#             port: 8000
+#             scheme: HTTP
+#           initialDelaySeconds: 5
+#           timeoutSeconds: 5
+#           periodSeconds: 5
+#           successThreshold: 1
+#           failureThreshold: 2
+#         readinessProbe:
+#           httpGet:
+#             path: /
+#             port: 8000
+#             scheme: HTTP
+#           initialDelaySeconds: 5
+#           timeoutSeconds: 5
+#           periodSeconds: 5
+#           successThreshold: 1
+#           failureThreshold: 2
+#         ports:
+#         - name: test-port
+#           containerPort: 8000
+#         volumeMounts:
+#         - name: model-volume
+#           mountPath: /usr/src/app/models
