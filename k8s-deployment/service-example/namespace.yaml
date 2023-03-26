@@ -1,0 +1,6 @@
+# to create namespace via command
+# kubectl create ns svc
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: svc

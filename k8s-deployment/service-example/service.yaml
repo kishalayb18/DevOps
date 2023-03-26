@@ -1,15 +1,15 @@
-apiViersion: v1
+apiVersion: v1
 kind: Service
 metadata:
   name: myservice
-  label:
+  labels:
     app: MyApp1
     env: Dev
 spec:
   type: NodePort
   ports:
-    nodePort: 32000
-    port: 9800
-    targetPort: 80
+    - nodePort: 32000
+      port: 9800
+      targetPort: 80
   selector:
-    app: MyApp1
+    app: MyApp
