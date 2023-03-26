@@ -1,8 +1,11 @@
 
-~F:\Documents\Coding\DevOps\k8s-deployment~
+_F:\Documents\Coding\DevOps\k8s-deployment_
 
 ## Objective
-> Here we are trying to create two namespaces, in the first namespace we are creating a pod and a service. In the second namespace we will create a pod (in real life it can a database or web server). After this we will try to access the service from the pod hosted in the second namespace. The important part to remember here is, both the pods should have the label as the label of the service.
+> Here we are trying to create two namespaces. 
+In the first namespace we are creating a pod and a service. 
+In the second namespace we will create a pod (in real life it can a database or web server). 
+After this we will try to access the service from the pod hosted in the second namespace. The important part to remember here is, both the pods should have the same label as the label of the service.
 This will demonstrate that the DNS gets created by default when the service gets created and other pods from other namespaces can also access the service.
 
 ### Commands
