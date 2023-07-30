@@ -9,6 +9,7 @@ _____________________________________
 ```
 #for the first time
 start minikube --vm-driver=virualbox 
+minikube start --no-vtx-check
 
 minikube start #to resume minikube
 
