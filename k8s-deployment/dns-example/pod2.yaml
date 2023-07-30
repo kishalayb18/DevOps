@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: second-pod
+  labels:
+    app: MyApp
+spec:
+  containers:
+    - name: sample-container-2
+      image: nginx
+      imagePullPolicy: Always
+      resources:
+        requests:
+          memory: 1Mi
+        limits:
+          memory: 200Mi

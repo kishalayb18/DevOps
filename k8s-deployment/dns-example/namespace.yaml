@@ -1,0 +1,15 @@
+# creating the first namespace
+# kubectl create ns first-ns  (to create namespace via command)
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: first-ns
+
+---
+# creating the second namespace
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: second-ns
