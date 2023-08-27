@@ -8,5 +8,8 @@ container:
   port: 80
 
 service:
+  name: nginx-svc
   type: ClusterIP
-  port: 80
+  port: 6000
+  protocol: TCP
+  targetPort: 31000

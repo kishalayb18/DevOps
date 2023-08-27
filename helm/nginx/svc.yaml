@@ -9,4 +9,4 @@ spec:
     - port: 80
       nodePort: 31000
   selector:
-    app: sample-app
+    app: nginx
