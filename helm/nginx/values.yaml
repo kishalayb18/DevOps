@@ -7,6 +7,6 @@ container:
   image: nginx
   port: 80
 
-# service:
-#   type: ClusterIP
-#   port: 80
+service:
+  type: ClusterIP
+  port: 80
