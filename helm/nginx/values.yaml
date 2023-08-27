@@ -1,0 +1,12 @@
+name: nginx
+replicaCount: 1
+
+
+container:
+  name: nginx 
+  image: nginx
+  port: 80
+
+# service:
+#   type: ClusterIP
+#   port: 80
