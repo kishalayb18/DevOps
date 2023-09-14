@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.name }}
+data:
+  env: {{ .Values.env | quote }}
+  firstvalue: {{ .Values.firstvalue }}
+  secondvalue: {{ .Values.secondvalue }}

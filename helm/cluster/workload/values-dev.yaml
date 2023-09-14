@@ -1,0 +1,32 @@
+# Networkpolicy Configuration
+networkPolicy:
+  ingress:
+    - name: app-1-nw
+      namespace: my-ns-dev
+      subnets:
+        - 10.226.2.98/32
+        - 10.226.2.119/32
+      ports:
+        - 7005
+        - 7006
+    
+    - name: allow-rule-ingress
+      namespace: my-ns-dev
+      ports:
+        - 8080
+        - 8091
+
+  egress:
+    - name: dynatrace-nw
+      namespace: my-ns-dev
+      subnets:
+        - 10.172.114.0/26
+      ports:
+        - 9999
+
+    - name: vault-nw
+      namespace: my-ns-dev
+      subnets:
+        - 10.149.17.37/32
+      ports:
+        - 443

@@ -1,0 +1,4 @@
+name: mychart-configmap
+env: development-environment
+firstvalue: 98756
+secondvalue: 94335

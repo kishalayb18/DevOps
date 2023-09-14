@@ -1,0 +1,4 @@
+name: mychart-configmap
+env: "sit-environment"
+firstvalue: 101001
+secondvalue: 101011
