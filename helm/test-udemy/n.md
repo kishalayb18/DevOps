@@ -2,14 +2,14 @@
 
 **First: when --set is mentioned in the command line**
 ```
-helm upgrade --set env="GREEN" configmap-sit test-kish-helm/ --values test-kish-helm/values-sit.yaml
+helm upgrade --set env="GREEN" configmap-sit test-kishalay-helm/ --values test-kishalay-helm/values-sit.yaml
 ```
 > it will choose env="GREEN" over the value mentioned in values-sit.yaml
 
 **Second: when --values is mentioned then it'll choose the custom environment specific values-sit.yaml file over the default values.yaml file**
 
 ```
-helm install configmap-sit test-kish-helm/ --values test-kish-helm/values-sit.yaml
+helm install configmap-sit test-kishalay-helm/ --values test-kishalay-helm/values-sit.yaml
 ```
 
 **Third: when --values flag is not mentioned values will be picked from the default values.yaml file, if values.yaml file is not present and the --values flag is not mentioned then it will throw error**
