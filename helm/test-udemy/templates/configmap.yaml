@@ -3,6 +3,6 @@ kind: ConfigMap
 metadata:
   name: {{ .Values.name }}
 data:
-  env: {{ .Values.env | quote }}
-  firstvalue: {{ .Values.firstvalue }}
-  secondvalue: {{ .Values.secondvalue }}
+  env: {{ .Values.env | default "SANDBOX" }}
+  firstvalue: {{ .Values.firstvalue | indent 3 | repeat 5 }}
+  secondvalue: {{ .Values.secondvalue | upper | quote }}

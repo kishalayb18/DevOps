@@ -1,4 +1,4 @@
 name: mychart-configmap
 env: DEFAULT_ENV
-firstvalue: 12345
-secondvalue: 678910
+firstvalue: "my first value"
+secondvalue: 678my second value

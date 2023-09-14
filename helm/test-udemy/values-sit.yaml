@@ -1,4 +1,4 @@
 name: mychart-configmap
-env: "sit-environment"
-firstvalue: 101001
-secondvalue: 101011
+# env: null
+firstvalue: "sit my first value"
+secondvalue: sit my second value
