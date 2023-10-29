@@ -1,9 +1,7 @@
-{{- range: $netpol := $.Values.networkPolicy.ingress }}
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: {{ $netpol.name }}
-  namespace: {{ $netpol.namespace }}
+  name: {{ .Values.netpol.name }}
 spec:
   podSelector: {}
   policyType: 
@@ -16,16 +14,19 @@ spec:
       podSelector:
         matchLabels:
           istio: ingressgateway
-{{- if $netpol.subnets }}
-{{- range $subnet := $netpol.subnets }}
+{{- range $subnet := .Values.netpol.subnets }}
     - ipBlock:
         cidr: {{ $subnet }}
 {{- end }}
-{{- end }}
-    ports:
-{{- range $port := $netpol.ports }}
-    - protocol: TCP
-      port: {{ $port }}
-{{- end }}
----
-{{- end }}
+    
+
+
+
+
+
+
+
+
+
+
+

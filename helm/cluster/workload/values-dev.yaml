@@ -4,8 +4,8 @@ networkPolicy:
     - name: app-1-nw
       namespace: my-ns-dev
       subnets:
-        - 10.226.2.98/32
-        - 10.226.2.119/32
+        - 10.1.2.98/32
+        - 10.1.2.119/32
       ports:
         - 7005
         - 7006

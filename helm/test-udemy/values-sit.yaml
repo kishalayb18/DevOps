@@ -2,3 +2,30 @@ name: mychart-configmap
 # env: null
 firstvalue: "sit my first value"
 secondvalue: sit my second value
+cmhosts:
+    - test.first.com
+    - test.second.com
+    - test.third.com
+
+ServiceEntry:
+  name: test-se
+  hosts:
+    - test.first.com
+    - test.second.com
+    - test.third.com
+  ports:
+    name: TCP
+    number: 443'
+    protocol: http
+
+
+
+netpol:
+    name: app-1-nw
+    subnets:
+      - 10.1.2.98/32
+      - 10.1.2.119/32
+      - 10.3.2.117/32
+    ports:
+      - 7005
+      - 7006
