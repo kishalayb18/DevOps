@@ -1,6 +1,6 @@
 # DevOps 
 
-_ This repository contains topics related to DevOps tools _
+_This repository contains topics related to DevOps tools_
 
 - Kubernetes
 - Helm
