@@ -5,10 +5,10 @@ FROM openjdk:11-jre-slim
 WORKDIR /app
 
 # Copy the application JAR file into the container at the specified working directory
-COPY target/springbootdemo.jar /app/springbootdemo.jar
+COPY target/SpringBootDemoApplication.jar /app/SpringBootDemoApplication.jar
 
 # Expose the port that the application will run on
 EXPOSE 8090
 
 # Specify the command to run the application
-CMD ["java", "-jar", "springbootdemo.jar"]
+CMD ["java", "-jar", "SpringBootDemoApplication.jar"]

@@ -9,7 +9,7 @@ COPY . /app
 #COPY HelloWorld.java /app > this will work as there is single file
 
 # Compile the Java source code
-RUN javac HelloWorld.java
+RUN javac HelloKishalay.java
 
 # Run the application
-CMD ["java", "HelloWorld"]
+CMD ["java", "HelloKishalay"]

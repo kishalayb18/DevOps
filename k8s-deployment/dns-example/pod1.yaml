@@ -7,7 +7,7 @@ metadata:
 spec:
   containers:
     - name: sample-container-1
-      image: nginx
+      image: nginx:v2
       imagePullPolicy: Always
       resources:
         requests:
