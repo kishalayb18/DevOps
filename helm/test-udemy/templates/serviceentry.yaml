@@ -1,0 +1,19 @@
+# apiVersion: networking.istio.io/v1beta1
+# kind: ServiceEntry
+# metadata:
+#   name: {{ .Values.ServiceEntry.name }}
+#   labels:
+#     cluster: ops
+# spec:
+#   exportTo:
+#   - .
+# hosts:
+# {{- range $host := $.Values.ServiceEntry.hosts }}
+#   - {{ $host}}
+# {{- end }}
+# location: MESH_EXTERNAL
+# ports:
+# - name: {{ .Values.ServiceEntry.ports.name }}
+#   number: {{ .Values.ServiceEntry.ports.number }}
+#   protocol: {{ .Values.ServiceEntry.ports.protocol }}
+# resolution: DNS

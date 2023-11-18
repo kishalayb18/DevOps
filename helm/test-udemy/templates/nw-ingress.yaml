@@ -1,0 +1,32 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ .Values.netpol.name }}
+spec:
+  podSelector: {}
+  policyType: 
+  - Ingress
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: istio-internal
+      podSelector:
+        matchLabels:
+          istio: ingressgateway
+{{- range $subnet := .Values.netpol.subnets }}
+    - ipBlock:
+        cidr: {{ $subnet }}
+{{- end }}
+    
+
+
+
+
+
+
+
+
+
+
+
