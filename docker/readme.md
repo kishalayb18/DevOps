@@ -14,7 +14,7 @@ Just like processes, containers have different states throughout their lifecycle
 4. Stopped state
 5. Killed/Deleted state
 
-![docker container lifecycle](lifecycle.png)
+![docker container lifecycle](https://github.com/kishalayb18/DevOps/blob/main/docker/lifecycle.png?raw=true)
 
 ## Different states of Docker Container Lifecycle
 
