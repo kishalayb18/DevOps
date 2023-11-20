@@ -14,21 +14,21 @@ Just like processes, containers have different states throughout their lifecycle
 4. Stopped state
 5. Killed/Deleted state
 
-![docker container lifecycle](https://github.com/kishalayb18/DevOps/blob/main/docker/lifecycle.png?raw=true)
+![docker container lifecycle](https://media.licdn.com/dms/image/D4D22AQEbeCgjiT7F3w/feedshare-shrink_800/0/1700393481062?e=1703116800&v=beta&t=bV3Bgw2eZVyh-H7sEVcShVG4Emd_AS_wc264yzj0vco)
 
 ## Different states of Docker Container Lifecycle
 
 #### Created state
 The very first state in the lifecycle, after you are done with building the docker image, is the Created state. In this phase, a docker container is created from a docker image.
 ```
-docker create --name=app1 nginx:alpine
+docker create --name=mycontainer <docker image name>:<docker image tag>
 ```
 #### Running state
 In the running phase, a docker container is running actively. This means the commands listed in the image are being executed one by one by the container.
 A container that has been created by the `docker create` command or stopped can be started using the `docker start` command
     docker start <container-id or container-name>
 
-Or if a container is not created and we want to create a container as well as run it at the same time, we can directly use the docker run command
+When a container is not created and we want to create a container as well as run it at the same time, we can directly use the docker run command
 ```
 docker run <container-id or container-name>
 ```
@@ -36,7 +36,7 @@ docker run <container-id or container-name>
 #### Paused / Unpaused state
 The `docker pause` command effectively freezes or suspends all the processes running in a container. When in a paused state, the container is unaware of its state. It basically sends the **SIGSTOP** signal to pause the processes in the container.
 ```
-docker pause container docker pause container <container-id or container-name>
+docker pause container <container-id or container-name>
 ```
 
 Similarly, to get the paused container back on running, we’d use the `docker unpause` command
