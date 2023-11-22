@@ -1,3 +1,6 @@
+# This is a sample dockerfile for Springboot
+# rename this file to Dockerfile
+
 # Use an official OpenJDK runtime as a parent image
 FROM openjdk:22-ea-24-jdk-slim-bookworm
 
