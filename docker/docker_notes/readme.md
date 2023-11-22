@@ -72,11 +72,11 @@ docker run --name <container name> -e <ENV_VARIABLE>=<VALUE> <image name>:<image
 > sample command
 > `docker run -e MYSQL_ROOT_PASSWORD=test@123 mysql`
 
-**sample command**
+**Scenario of Docker run command**
 `docker  run --name=webserver -d -p 8000:80 nginx`
-> -d will run this container in the detached mode,
-> -p flag is for published the image port,
-> 8000:80 > 8000 is the host machine port number, 80 is the application port number
+- -d will run this container in the detached mode,
+- -p flag is for published the image port,
+- 8000:80 > 8000 is the host machine port number, 80 is the application port number
 
 **to list all the running Docker containers**
 ```
