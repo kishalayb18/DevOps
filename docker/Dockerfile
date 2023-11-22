@@ -1,0 +1,14 @@
+# Use an official OpenJDK runtime as a parent image
+FROM openjdk:22-ea-24-jdk-slim-bookworm
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the application JAR file into the container at the specified working directory
+COPY SpringBootDemo/target/SpringBootDemo-0.0.1-SNAPSHOT.jar /app/SpringBootDemo.jar
+
+# Expose the port that the application will run on
+EXPOSE 8090
+
+# Specify the command to run the application
+CMD ["java", "-jar", "SpringBootDemo.jar"]
