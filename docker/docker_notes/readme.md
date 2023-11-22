@@ -1,6 +1,6 @@
 # DOCKER
 
-#### What is Docker?
+### What is Docker?
 Docker is a platform that allows us to package our applications into deployable executables — called containers, with all its necessary OS libraries and dependencies
 ---
 ### Docker images
@@ -34,9 +34,11 @@ docker image rmi <image id>
 docker image rm -f <image id>
 ```
 ways to delete the docker images
->docker rmi <image id>
->docker rmi <image id> <image id> <image id>
->docker rmi <image id> -f
+```
+docker rmi <image id>
+docker rmi <image id> <image id> <image id>
+docker rmi <image id> -f
+```
 
 **to remove the unused docker images**
 ```
@@ -66,13 +68,12 @@ docker run --name <container name> -d <image name>:<image tag>
 **Provide environment variable while running a Docker Container**
 ```
 docker run --name <container name> -e <ENV_VARIABLE>=<VALUE> <image name>:<image tag>
-docker run -e MYSQL_ROOT_PASSWORD=test@123 mysql
 ```
+> sample command
+> `docker run -e MYSQL_ROOT_PASSWORD=test@123 mysql`
 
 **sample command**
-```
-docker  run --name=webserver -d -p 8000:80 nginx
-```
+`docker  run --name=webserver -d -p 8000:80 nginx`
 > -d will run this container in the detached mode,
 > -p flag is for published the image port,
 > 8000:80 > 8000 is the host machine port number, 80 is the application port number
