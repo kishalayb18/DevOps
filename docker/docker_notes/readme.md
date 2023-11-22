@@ -1,8 +1,10 @@
 # DOCKER
 
 ### What is Docker?
-Docker is a platform that allows us to package our applications into deployable executables — called containers, with all its necessary OS libraries and dependencies
+Docker is a platform that allows us to package our applications into deployable executables, called containers, with all its necessary OS libraries and dependencies
+
 ---
+
 ### Docker images
 Docker images are light weight, standalone, executable package of software that includes everything needed(code, runtime, system tools, binaries, settings) to run an application
 
