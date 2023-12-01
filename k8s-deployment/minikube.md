@@ -4,18 +4,16 @@
 start minikube --vm-driver=virualbox 
 minikube start --no-vtx-check
 
+# from second time
 minikube start #to resume minikube
-
 minikube status
-
 minikube stop
 
 #need not to use this command if you want to resume minikube later
 minikube delete 
+```
 
-## Troubleshooting
-
- ### Linux 
+### Linux 
 **Set your proxy**
 export HTTP_PROXY=http://<proxy hostname:port>
 export HTTPS_PROXY=https://<proxy hostname:port>
