@@ -4,13 +4,20 @@ pipeline {
         stage ("clone"){
             steps{
                 git url: "https://github.com/LondheShubham153/node-todo-cicd.git", branch: "master"
-                echo 'code cloning Kishalay'
+                echo 'code cloning completed'
+            }
+        }
+        stage("scan"){
+            steps{
+                echo 'code scanning completed'
             }
         }
         stage ("build"){
             steps{
                 sh "docker build -t node-test-new ."
             }
+            echo 'code build completed'
+
         }
         stage ("push"){
             steps{
@@ -19,6 +26,7 @@ pipeline {
                     sh "docker tag node-test-new:latest ${env.dockerhubkishalayuser}/node-test-new:v1"
                     sh "docker push ${env.dockerhubkishalayuser}/node-test-new:v1"
                 }
+                echo 'pushed to ${env.dockerhubkishalayuser}'
             }
         }
     }
