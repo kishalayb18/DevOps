@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+    stages {
+        stage ("clone"){
+            steps{
+                git url: "https://github.com/LondheShubham153/node-todo-cicd.git", branch: "master"
+                echo 'code cloning Kishalay'
+            }
+        }
+        stage ("build"){
+            steps{
+                sh "docker build -t node-test-new ."
+            }
+        }
+        stage ("push"){
+            steps{
+                withCredentials([usernamePassword(credentialsId:"dockerhub_kishalay",passwordVariable:"dockerhubkishalayPass",usernameVariable:"dockerhubkishalayUser")]){
+                    sh "docker login -u ${env.dockerhubkishalayuser}  -p ${env.dockerhubkishalaypass}"
+                    sh "docker tag node-test-new:latest ${env.dockerhubkishalayuser}/node-test-new:v1"
+                    sh "docker push ${env.dockerhubkishalayuser}/node-test-new:v1"
+                }
+            }
+        }
+    }
+}
