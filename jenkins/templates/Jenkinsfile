@@ -15,8 +15,8 @@ pipeline {
         stage ("build"){
             steps{
                 sh "docker build -t node-test-new ."
+                echo 'code build completed'
             }
-            echo 'code build completed'
 
         }
         stage ("push"){
