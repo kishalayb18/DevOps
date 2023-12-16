@@ -1,0 +1,27 @@
+apiVersion: v1/apps
+kind: Deployment
+metadata:
+  name: deployment_env
+  labels:
+    app: sample_env
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sample_env
+  template:
+    metadata:
+      labels:
+        app: sample_env
+    spec:
+      containers:
+      - name: sample_nginx_env
+        image: nginx
+        env:
+          - name: Db_Port
+            ValueFrom:
+              ConfigMapKeyRef:
+                name:  dbConfig
+                key: db-port
+        ports:
+        - containerPort: 8091
