@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+    stages {
+        stage ("git clone"){
+            steps{
+                git url: "https://github.com/kishalayb18/DevOps.git", branch: "main"
+                echo 'code cloning completed'
+            }
+        }
+        
+        stage ("deploy to kubernetes") {
+            steps {
+                // dir will route to the right folder in the cloned repository
+                dir('k8s-deployment/single-container-application') {
+                    script {
+                        kubernetesDeploy (configs: 'namespace.yaml, deployment.yaml, service.yaml',  kubeconfigId: 'kubernetes_config')
+                    }
+                }
+                 echo 'successfully deployed to minikube cluster'
+            }
+        }
+    }
+}
