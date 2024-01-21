@@ -1,0 +1,11 @@
+name: mychart-configmap
+env: development-environment
+firstvalue: "my first value"
+secondvalue: 678my second value
+
+ServiceEntry:
+  name: test-se
+  hosts:
+    - test.first.com
+    - test.second.com
+    - test.third.com

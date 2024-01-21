@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: skillup-clusterip
+  labels:
+    app: skillup-practice
+spec:
+  type: ClusterIP
+  # clusterIP: 10.96.9.0/24
+  ports:
+  - name: dns
+    port: 8081
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: skillup-practice

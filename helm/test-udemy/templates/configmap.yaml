@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.name }}
+data:
+  env: {{ .Values.env | default "SANDBOX" }}
+  firstvalue: {{ .Values.firstvalue | indent 3 | repeat 5 }}
+  secondvalue: {{ .Values.secondvalue | upper | quote }}

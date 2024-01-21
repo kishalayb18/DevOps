@@ -56,4 +56,12 @@ kubectl delete service/sample-static-service -n sample
 
 kubectl delete namespace sample
 ```
+
+### To view the output in the browser
+```
+kubectl get nodes -o wide
+```
+- copy the internal IP from there _192.168.59.101_
+- `<internal IP>:<nodePort port number>` _eg. 192.168.59.101:32000_
+- paste it to the browser to see the result
 _______________________________________________________________________

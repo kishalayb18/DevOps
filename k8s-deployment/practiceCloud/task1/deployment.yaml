@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: skillup
+spec:
+  replicas: 3
+  selector: 
+    matchLabels:
+      app: skillup-practice
+  template:
+    metadata:
+      labels:
+        app: skillup-practice
+    spec:
+      containers:
+      - name: skillup
+        image: nginx
+        ports:
+        - containerPort: 80
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+          - name:  svc-portconfig
+            mountPath:  /opt
+      volumes:
+      - name: svc-portconfig
+        configMap:
+          name: port-config

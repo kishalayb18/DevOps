@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployment-cm
+  labels:
+    app: sample-cm
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sample-cm
+  template:
+    metadata:
+      labels:
+        app: sample-cm
+    spec:
+      containers:
+      - name: sample-nginx-cm
+        image: nginx
+        volumeMounts:
+          - name: db-connection
+            mountPath: /opt
+        ports:
+        - containerPort: 8091
+
+      volumes:
+      - name: db-connection
+        configMap:
+          name: dbconfig
