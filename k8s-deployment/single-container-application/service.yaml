@@ -8,6 +8,6 @@ spec:
   ports:
     - port: 8081
       targetPort: 80
-      nodePort: 31000
+      nodePort: 31009
   selector:
     app: sample-app
