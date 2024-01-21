@@ -1,7 +1,7 @@
 pipeline {
     agent any
     parameters {
-        string defaultValue: 'skill', description: 'namespace name variable', name: 'namespace'
+        string (defaultValue: 'skill', description: 'namespace name variable', name: 'namespace)
     }
     stages {
         stage ("git clone"){
@@ -14,7 +14,7 @@ pipeline {
         stage ("deploy to kubernetes") {
             steps {
                 // dir will route to the right folder in the cloned repository
-                echo 'cluster: minikube namespace: $namespace'
+                echo 'cluster: minikube namespace: "$namespace"'
                 dir('k8s-deployment/single-container-application') {
                     script {
                         kubernetesDeploy (configs: 'namespace.yaml, deployment.yaml, service.yaml',  kubeconfigId: 'kubernetes_config')
