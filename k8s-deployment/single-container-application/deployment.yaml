@@ -5,6 +5,9 @@ metadata:
   namespace: sample
 spec:
   replicas: 1
+  selector: 
+    matchLabels:
+      app: sample-app
   template:
     metadata:
       labels:
@@ -16,6 +19,3 @@ spec:
         ports:
         - containerPort: 80
         imagePullPolicy: Always
-  selector: 
-    matchLabels:
-      app: sample-app
