@@ -1,15 +1,32 @@
 # Secops Project :  cluster governance rules using kyverno
+
+1 [Problem statement]()
+2 [What is kyverno]()
+3 [Workflow](https://github.com/kishalayb18/DevOps/blob/feature/kubernetes/k8s-deployment/kyverno/kyverno.md#Workflow)
+4 [Scope of this project]()
+4 [Commands](https://github.com/kishalayb18/DevOps/blob/feature/kubernetes/k8s-deployment/kyverno/kyverno.md#Commands)
+5 [Tools leveraged]()
+6 [Reference links]()
+
+### Problem statement
+
+### What is kyverno
 kyverno is dynamic kubernetes admission controller which functions at the cluster level, this can do the following operations in Kubernetes
 - generate
 - validate
 - mutate
 - verify images
 
+### Workflow
+
+### Scope of this project
 in this project we will leverage the validate feature, to enforce the request limit policy for the pods, similarly namespace resource quota policy, certain naming convention for deployment, require probes for health check, this sort of policies can also be enforced by kyverno
+
+We will configure certain policies to enforce the rules, then we will try violating those rules to verify how kyverno restrict the resources from provisioning
 
 this project involves the best practices of SecOps, however not only security, with this cost optimization can be assured from business point of view when we implement the admission controller to the kubernetes cluster
 
-### Steps
+### Commands
 - install kyverno to the cluster 
 ```
 kubectl create -f https://github.com/kyverno/kyverno/releases/download/v1.8.5/install.yaml
@@ -45,11 +62,11 @@ kubectl apply -f deployment.yaml
         and limits are required. rule autogen-validate-resources failed at path /spec/template/spec/containers/0/resources/limits/
 
 
-### tools leveraged
+### Tools leveraged
 - kubernetes cluster : minikube
 - SCM : git, github
 
-### reference links
+### Reference links
 - [kyverno tuitorial](https://www.youtube.com/watch?v=5ihkMblumD0)
 - [kyverno documentation]( https://kyverno.io/docs/kyverno-policies/)
 - [kyverno github](https://github.com/kyverno/kyverno)
