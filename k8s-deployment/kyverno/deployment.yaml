@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: green-deployment
+  namespace: cns
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: green-app
+  template:
+    metadata:
+      labels:
+        app: green-app
+    spec:
+      containers:
+      - name: green-deployment
+        image: nginx
+        ports:
+        - containerPort: 80
+        imagePullPolicy: Always
