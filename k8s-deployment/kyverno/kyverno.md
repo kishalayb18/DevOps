@@ -43,7 +43,7 @@ kubectl apply -f deployment.yaml
     require-requests-limits:
     autogen-validate-resources: 'validation error: CPU and memory resource requests
         and limits are required. rule autogen-validate-resources failed at path /spec/template/spec/containers/0/resources/limits/
-```
+
 
 ### tools leveraged
 - kubernetes cluster : minikube
