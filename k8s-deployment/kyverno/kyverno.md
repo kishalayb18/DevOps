@@ -1,4 +1,4 @@
-### Secops Project :  cluster governance rules using kyverno
+# Secops Project :  cluster governance rules using kyverno
 kyverno is dynamic kubernetes admission controller which functions at the cluster level, this can do the following operations in Kubernetes
 - generate
 - validate
@@ -9,7 +9,7 @@ in this project we will leverage the validate feature, to enforce the request li
 
 this project involves the best practices of SecOps, however not only security, with this cost optimization can be assured from business point of view when we implement the admission controller to the kubernetes cluster
 
-### commands
+### Steps
 - install kyverno to the cluster 
 ```
 kubectl create -f https://github.com/kyverno/kyverno/releases/download/v1.8.5/install.yaml
