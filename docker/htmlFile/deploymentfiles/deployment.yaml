@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: static-deployment
+  name: page_kishalay_deployment
 spec:
   replicas: 1
   selector: 
     matchLabels:
-      app: sample-app
+      app: page_kishalay
   template:
     metadata:
       labels:
-        app: sample-app
+        app: page_kishalay
     spec:
       containers:
       - name: new-app-container-1
