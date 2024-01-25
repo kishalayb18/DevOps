@@ -8,7 +8,7 @@ pipeline {
             }
         }
 
-        stage ("build") {
+        stage ("docker build") {
             
             steps{
                 dir('docker/htmlFile/dockerfiles') {
@@ -21,7 +21,7 @@ pipeline {
 
         }
 
-        stage ("push") {
+        stage ("docker push") {
             steps{
                 withCredentials([usernamePassword(credentialsId:"docker-cred",passwordVariable:"dockerhubkishalayPass",usernameVariable:"dockerhubkishalayUser")]){
                     sh "docker login -u ${env.dockerhubkishalayuser}  -p ${env.dockerhubkishalaypass}"
