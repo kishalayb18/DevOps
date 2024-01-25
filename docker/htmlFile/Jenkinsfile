@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage ("git clone"){
             steps{
-                git url: "https://github.com/kishalayb18/DevOps.git", branch: "feature/kubernetesgit add"
+                git url: "https://github.com/kishalayb18/DevOps.git", branch: "feature/kubernetes"
                 echo 'code cloning completed'
             }
         }
