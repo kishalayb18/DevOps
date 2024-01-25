@@ -1,0 +1,46 @@
+pipeline {
+    agent any
+    stages {
+        stage ("git clone"){
+            steps{
+                git url: "https://github.com/kishalayb18/DevOps.git", branch: "main"
+                echo 'code cloning completed'
+            }
+        }
+
+        stage ("build") {
+            
+            steps{
+                dir('docker/htmlFile') {
+                    script {
+                        sh "docker build -t page_kishalay ."
+                        echo 'docker build successful'
+                    }
+                }
+            }
+
+        }
+        stage ("push") {
+            steps{
+                withCredentials([usernamePassword(credentialsId:"docker-cred",passwordVariable:"dockerhubkishalayPass",usernameVariable:"dockerhubkishalayUser")]){
+                    sh "docker login -u ${env.dockerhubkishalayuser}  -p ${env.dockerhubkishalaypass}"
+                    sh "docker tag page_kishalay ${env.dockerhubkishalayuser}/page_kishalay:v1"
+                    sh "docker push ${env.dockerhubkishalayuser}/page_kishalay:v1"
+                }
+                echo 'successfully pushed to ${env.dockerhubkishalayuser} repository'
+            }
+        }
+        
+        stage ("deploy to kubernetes") {
+            steps {
+                // dir will route to the right folder in the cloned repository
+                echo "cluster: ${cluster} namespace: ${namespace}"
+                dir('k8s-deployment/single-container-application') {
+                    script {
+                        kubernetesDeploy (configs: 'deployment.yaml, service.yaml',  kubeconfigId: 'kubernetes_config')
+                    }
+                }
+            }
+        }
+    }
+}
