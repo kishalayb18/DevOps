@@ -6,11 +6,11 @@ spec:
   replicas: 1
   selector: 
     matchLabels:
-      app: page_kishalay
+      app: page-kishalay
   template:
     metadata:
       labels:
-        app: page_kishalay
+        app: page-kishalay
     spec:
       containers:
       - name: new-app-container-1
