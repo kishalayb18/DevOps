@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: page_kishalay_deployment
+  name: page-kishalay-deployment
 spec:
   replicas: 1
   selector: 
@@ -13,7 +13,7 @@ spec:
         app: page-kishalay
     spec:
       containers:
-      - name: new-app-container-1
+      - name: html-app-container-1
         image: kishalayb18/page_kishalay:v1
         ports:
         - containerPort: 80
