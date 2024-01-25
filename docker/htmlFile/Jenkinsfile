@@ -13,7 +13,7 @@ pipeline {
             steps{
                 dir('docker/htmlFile/dockerfiles') {
                     script {
-                        sh "docker build -t page_kishalay ."
+                        bat "docker build -t page_kishalay ."
                         echo 'docker build successful'
                     }
                 }
@@ -24,9 +24,9 @@ pipeline {
         stage ("docker push") {
             steps{
                 withCredentials([usernamePassword(credentialsId:"docker-cred",passwordVariable:"dockerhubkishalayPass",usernameVariable:"dockerhubkishalayUser")]){
-                    sh "docker login -u ${env.dockerhubkishalayuser}  -p ${env.dockerhubkishalaypass}"
-                    sh "docker tag page_kishalay ${env.dockerhubkishalayuser}/page_kishalay:v1"
-                    sh "docker push ${env.dockerhubkishalayuser}/page_kishalay:v1"
+                    bat "docker login -u ${env.dockerhubkishalayuser}  -p ${env.dockerhubkishalaypass}"
+                    bat "docker tag page_kishalay ${env.dockerhubkishalayuser}/page_kishalay:v1"
+                    bat "docker push ${env.dockerhubkishalayuser}/page_kishalay:v1"
                 }
                 echo 'successfully pushed to ${env.dockerhubkishalayuser} repository'
             }
@@ -35,7 +35,7 @@ pipeline {
         stage ("deploy to kubernetes") {
             steps {
                 // dir will route to the right folder in the cloned repository
-                echo "cluster: ${cluster} namespace: ${namespace}"
+                echo "deploying to minikube"
                 dir('docker/htmlFile/deploymentfiles') {
                     script {
                         kubernetesDeploy (configs: 'deployment.yaml, service.yaml',  kubeconfigId: 'kubernetes_config')
