@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:latest
+        env:
+          - name: MYSQL_DATABASE
+            valueFrom:
+              configMapKeyRef:
+                name: mysql-cm
+                key: DB_NAME
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysql-secret
+                key: DB_PASSWORD
+          - name: MYSQL_USER1
+            valueFrom:
+              configMapKeyRef:
+                name: mysql-cm
+                key: user1
+          - name: MYSQL_PASSWORD1
+            valueFrom:
+              secretKeyRef:
+                name: mysql-secret
+                key: user1
