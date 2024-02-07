@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-cm
+data:
+  DB_NAME: "CGPHubBase"
+  user1: "Kishalay"
