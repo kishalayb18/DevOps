@@ -15,6 +15,13 @@ spec:
       containers:
       - name: mysql
         image: mysql:latest
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
         env:
           - name: MYSQL_DATABASE
             valueFrom:
@@ -36,3 +43,10 @@ spec:
               secretKeyRef:
                 name: mysql-secret
                 key: user1
+        volumeMounts:
+        - name: mysql-volume
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-volume
+        persistentVolumeClaim:
+          claimName: mysql-pvc
