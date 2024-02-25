@@ -10,6 +10,16 @@ spec:
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: standard
-  hostPath:
-    path: /mnt/data/mysql
+  storageClassName: local-storage
+  local:
+    path: F:\Documents\Coding\DevOps\k8s-deployment\practiceCloud\task2
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - minikube
+
+    

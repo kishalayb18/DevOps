@@ -16,12 +16,12 @@ spec:
       - name: mysql
         image: mysql:latest
         resources:
-          requests:
-            memory: "64Mi"
-            cpu: "250m"
           limits:
-            memory: "128Mi"
+            memory: "500Mi"
             cpu: "500m"
+          requests:
+            memory: "450Mi"
+            cpu: "450m"
         env:
           - name: MYSQL_DATABASE
             valueFrom:
@@ -45,7 +45,7 @@ spec:
                 key: user1
         volumeMounts:
         - name: mysql-volume
-          mountPath: /var/lib/mysql
+          mountPath: /home/vagrant/mysql/storage
       volumes:
       - name: mysql-volume
         persistentVolumeClaim:
