@@ -1,10 +1,11 @@
 This repository is a sample application for users to practice
 
+
 ### docker file
 
 - created the docker file to containerized the application
 
-- commands to run
+##### commands to run
 ```
 docker build -t cloudpractice3 .
 ```
