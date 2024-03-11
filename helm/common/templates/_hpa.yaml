@@ -1,0 +1,40 @@
+{{- define "common.horizontalPodAutoscaler"}}
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+    name: {{ .Values.appname}}
+    labels:
+        {{- include "app.labels" . | nindent 4 -}}
+spec:
+    maxReplicas: {{ default 5 .Values.hpa.maxReplicas }}
+    minReplicas: {{ .Values.hpa.minReplicas | default 1 }}
+    scaleTargetRef:
+        apiVersion: apps/v1
+        kind: {{ .Values.hpa.scaleTargetKind }}
+        name: {{ .Values.appname }}
+    metrics:
+    {{- if .Values.hpa.targetMemoryAverageValue -}}
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: AverageValue
+          averageValue: {{ .Values.hpa.targetMemoryAverageValue}}
+    {{- end -}}
+    {{- if .Values.hpa.targetMemoryAverageUtilization -}}
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageValue: {{ .Values.hpa.targetMemoryAverageUtilization}}
+    {{- end -}}
+    {{- if .Values.hpa.targetCPUAverageValue -}}
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: AverageValue
+          averageValue: {{ .Values.hpa.targetCPUAverageValue}}
+    {{- end -}}
