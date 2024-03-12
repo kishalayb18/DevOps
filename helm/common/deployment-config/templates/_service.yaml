@@ -20,17 +20,17 @@ spec:
     selector:
         {{- include "app.selectorLabels" . | nindent 8 -}}
     ports:
-        {{- if .Values.service.ports -}}
+      {{- if .Values.service.ports -}}
         {{- range .Values.service.ports -}}
-    -   port: {{.}}
-        protocol: TCP
-        targetPort: {{.}}
-        name: port{{.}}
+    - port: {{.}}
+      protocol: TCP
+      targetPort: {{.}}
+      name: port{{.}}
         {{- end -}}
-        {{- else -}}
-    -   port: 8080
-        protocol: TCP
-        targetPort: 8080
-        name: port8080
-        {{- end -}}
+      {{- else -}}
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080
+      name: port8080
+      {{- end -}}
 {{- end -}}
