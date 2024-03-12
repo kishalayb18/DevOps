@@ -38,3 +38,11 @@ spec:
           type: AverageValue
           averageValue: {{ .Values.hpa.targetCPUAverageValue}}
     {{- end -}}
+    {{- if .Values.hpa.targetCPUAverageUtilization -}}
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageValue: {{ .Values.hpa.targetCPUAverageUtilization}}
+    {{- end -}}
