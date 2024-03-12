@@ -1,0 +1,14 @@
+{{- define "common.podDisruptionBudget" -}}
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+    name: {{ include "app.name" }}
+    labels:
+        {{- include "app.labels" . | nindent 8 -}}
+spec:
+    minAvailable: {{ default 1 .Values.pdb.minAvailable }}
+    selector:
+        matchLables:
+            app: {{ include "app.name" . }}
+{{- end -}}
