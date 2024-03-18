@@ -1,1 +1,30 @@
-{{}}
+{{/*
+virtual service
+*/}}
+{{- define "common.virtualService" }}
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name:  {{ included "app.name" . }}
+  labels:
+    {{- included "app.labels" . | nindent 4 }}
+spec:
+  gateways:
+  - {{ .Values.helmArgs.namespace }}-gw
+  hosts:
+  {{- if eq "prod" .Values.helmArgs.targetEnv }}
+    - {{ .Values.virtualService.gateway.k8sHostDomain }}-prod
+  {{- else}}
+    - {{ include "app.name" . }}-{{ .Values.virtualService.gateway.k8sHostDomain }}
+  {{- end }}
+    exportTo:
+    - '.'
+    - istio-internal
+    http:
+    - route:
+      - destination:
+        host: {{ include "app.name" }}
+        port:
+          number: {{ default "8080" .Values.virtualService.servicePortNumber }}
+{{- end -}}
