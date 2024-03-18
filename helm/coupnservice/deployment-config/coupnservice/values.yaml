@@ -64,3 +64,12 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
+mysql:
+  auth:
+    rootPassword: test1234
+    database: mydb
+  primary:
+    service:
+      type: NodePort
+      nodePort: 32762
+  fullnameOverride: docker-mysql
