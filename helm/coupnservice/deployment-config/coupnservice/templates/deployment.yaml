@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "coupnservice.fullname" . }}
+  name: {{ include "coupnservice.name" . }}
   labels:
     {{- include "coupnservice.labels" . | nindent 4 }}
 spec:

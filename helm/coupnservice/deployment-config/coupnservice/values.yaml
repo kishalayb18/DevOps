@@ -65,11 +65,23 @@ autoscaling:
   # targetMemoryUtilizationPercentage: 80
 
 mysql:
+  enabled: true
   auth:
     rootPassword: test1234
     database: mydb
+  image:
+    debug: true
   primary:
     service:
       type: NodePort
-      nodePort: 32762
+      nodePorts:
+        mysql: 32762
+    startupProbe:
+      enabled: true
+      initialDelaySeconds: 60
+      periodSeconds: 25
+      timeoutSeconds: 1
+      failureThreshold: 15
+      successThreshold: 1
   fullnameOverride: docker-mysql
+  initdbScriptsConfigMap: mysql-initdb-config
