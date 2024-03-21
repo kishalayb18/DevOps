@@ -26,5 +26,5 @@ appVersion: "1.16.0"
 dependencies:
   - name: mysql
     condition: mysql.enabled
-    version: 9.1.4
-    repository: "@bitnami"
+    version: 9.23.0
+    repository: "https://charts.bitnami.com/bitnami"

@@ -77,7 +77,7 @@ mysql:
       nodePorts:
         mysql: 32762
     startupProbe:
-      enabled: true
+      enabled: false
       initialDelaySeconds: 60
       periodSeconds: 25
       timeoutSeconds: 1
