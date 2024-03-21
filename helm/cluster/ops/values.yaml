@@ -1,0 +1,56 @@
+gateway:
+  - environment: dev
+    namespace: cloud-sample-dev
+    gatewayName: sample-common-gateway
+    gw_ingress_target_label: mediumhigh-ingressgateway
+    servers:
+      host_url:
+        - cloud-first-dev.workload.mediumhightrust.k8s.godaddy.com
+        - cloud-sample-dev.workload.mediumhightrust.k8s.godaddy.com
+        - cloud-new-dev.workload.mediumhightrust.k8s.godaddy.com
+      port:
+        name: https
+        number: 443
+        protocol: HTTPS
+      tls:
+        credentialName: cloud-sample-dev-trustmh-credentials
+        mode: SIMPLE
+
+virtualservice:
+  - environment: dev
+    namespace: cloud-sample-dev
+    vsName: cloud-first-vs
+    gatewayName: sample-common-gateway
+    servers:
+      host_url: cloud-first-dev.workload.mediumhightrust.k8s.godaddy.com
+    service:
+      name: cloud-batch-service
+      portNumber: 8091
+
+  - environment: dev
+    namespace: cloud-sample-dev
+    vsName: cloud-new-vs
+    gatewayName: sample-common-gateway
+    servers:
+      host_url: cloud-new-dev.workload.mediumhightrust.k8s.godaddy.com
+    service:
+      name: cloud-bus-service
+      portNumber: 8091
+
+ServiceEntry:
+  - name: first-se
+    namespace: cloud-sample-dev
+    hosts:
+      - sample.gcpnp.com
+      - newgcp.googlehost.com
+    ports:
+      - name:  https
+        port: 443
+        protocol: TLS
+
+  - name: practicetest-se
+    namespace: cloud-sample-dev
+    hosts:
+      - practice.gcpnp.com
+    ports:
+        port: 443

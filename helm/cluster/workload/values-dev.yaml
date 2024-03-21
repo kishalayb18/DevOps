@@ -30,3 +30,7 @@ networkPolicy:
         - 10.149.17.37/32
       ports:
         - 443
+
+serviceAccount:
+  name: myServiceaccount
+  annotation: teeaformsa@projectnumbergcp18202406.iam.gserviceaccount.com
