@@ -1,0 +1,59 @@
+deployment:
+  replicas: 1
+  maxSurge: 40%
+  maxUnavailable: 25%
+
+container:
+  imageName: newmyhellopage
+  imageTag: v1
+
+  resources:
+    limits:
+      cpu: "1"
+      memory: 2Gi
+    requests:
+      cpu: 50m
+      memory: 1Gi
+
+  ports:
+  - 8080
+  
+  runAs:
+    group: 1001
+    user: 1001
+
+  command:
+  - home/java/bootstrap.sh
+
+  env:
+  - name:  APPLICATION_NAME
+    value: samplecloud
+  - name:  HOME
+    value: /home/java
+
+  envAddons:
+  - name: RESOLVER
+    value: valueresolver
+
+  livenessProbe:
+    path: samplecloud/liveness/path
+    port: 8080
+    initialDelaySeconds: 150
+
+  readinessProbe:
+    path: sample/readinessprobe/path
+    port: 8080
+    initialDelaySeconds: 51
+
+  volumeMounts:
+  - name: samplecacerts
+    type: configMap
+    mountPath: /home/java/cacerts
+  - name: bootstrap
+    type: configMap
+    mountPath: /home/java/bootstrap
+
+service:
+  type: ClustIP
+  ports:
+  - 80
