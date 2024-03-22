@@ -1,0 +1,32 @@
+{{/*
+This template serves as the blueprint for the Deployment objects that are create within the common library
+*/}}
+{{- define "common.egressSpec" }}
+{{- range $egress := $.Values.networkPolicy.egress }}
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+    name: {{ $egress.name }}
+spec:
+    {{- if $egress.selectorlabels }}
+    podSelector:
+        matchLabels:
+    {{ toYaml $egress.selectorlabels | indent 8 }}
+    {{- else }}
+    podSelector: {}
+    {{- end }}
+    policyTypes:
+    - Egress
+    egress:
+    - to:
+    {{-if $egress.namespaceSelector }}
+        - namespaceSelector:
+            matchLabels:
+                name: {{ $egress.namespaceSelector quote }}
+    {{- end -}}
+    {{- if $egress.subnets }}
+    {{- range $subnet := $egress.subnets }}
+        - ipBlock:
+          cidr: {{ $subnet }}
+{{- end }}
+{{- end }}
