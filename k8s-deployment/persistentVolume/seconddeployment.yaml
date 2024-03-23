@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mongo
+  name: mongosecond
 spec:
   replicas: 1
   selector:
@@ -13,8 +13,8 @@ spec:
         app: mongo
     spec:
       containers:
-        - image: mongo
-          name: mongo
+        - image: mongo:4.4
+          name: mongosecond
           args: ["--dbpath", "/data/db"]
           env:
             - name: MONGO_INITDB_ROOT_USERNAME
@@ -22,9 +22,8 @@ spec:
             - name: MONGO_INITDB_ROOT_PASSWORD
               value: "password"
           volumeMounts:
-            - mountPath: /data/db
-              name: mongo-volume
+            - name:  mongosecond-volume
+              mountPath:  /data/db
       volumes:
-        - name: mongo-volume
-          persistentVolumeClaim:
-            claimName: mongo-pvc
+        - name: mongosecond-volume
+          emptyDir: {}
