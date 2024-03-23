@@ -72,6 +72,27 @@ This will create the _/data_ directory on the node, the same data will be mounte
 - view the content of the files ```sudo cat /data/filename```
 
 
+## Persistent Volumes
+
+### accessModes:
+- ReadWriteOnce : this volumes can be read write by a single node, best for the scenario where all the pods are running in a single node
+- ReadOnlyOnce : here this volumes can be read by a single node
+- ReadWriteMany : this volume can be mounted and read write by many nodes, if the pods are running in different nodes then this suits the most
+- ReadOnlyMany : here this volume can be mounted and read by many nodes
+- ReadWriteOncePod : this is when you want only one pod on the whole cluster can read write the volume
+
+### Create the Physical Storage Path Manually
+- ssh to the minikube by ```minikube ssh```
+- create the directories on the minikube node by ```sudo mkdir storage/data -p```
+- view the created directories ```ls storage```
+
+### Deployment Steps
+- first deploy the _persistentVolume.yaml_ file
+- then deploy the _staticpvc.yaml_ file
+- check the status of the pv, pvc
+- notice that the pv is bound by mongo-pvc
+- deploy the _deployment.yaml_ file
+
 ```
 kubectl port-forward svc/mongo-svc 32000:27017
 ```
