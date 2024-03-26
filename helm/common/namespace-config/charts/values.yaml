@@ -1,0 +1,42 @@
+#serviceentry
+serviceEntry:
+  - name: vault
+    hosts:
+      - vault.sample.com
+    ports:
+      - 443
+
+#networkpolicy
+networkPolicy:
+  ingress:
+    - name: smtp-ig-nw
+      subnets:
+        - 129.0.31.15/32
+        - 127.125.3.25/24
+      ports:
+        - 25
+  egress:
+    - name: smtp-eg-nw
+      subnets:
+        - 129.0.31.15/32
+        - 127.125.3.25/24
+      ports:
+        - 25
+
+gateway:
+  apps:
+    - sampletest1
+    - sampletest2
+  appHostDomain: sample.service.sit
+  k8sHostDomain: cloud-first-dev.workload.mediumhightrust.k8s.godaddy.com
+  tlsCredentialName: cloud-sample-dev-trustmh-credentials
+  ingressTargetLabel: mediumhigh-ingressgateway
+  serverPortName: https
+  serverPortNumber: 443
+  serverPortProtocol: HTTPS
+
+virtualService:
+  serverPortNumber: 443
+  gateway:
+    k8sHostDomain: cloud-first-dev.workload.mediumhightrust.k8s.godaddy.com
+

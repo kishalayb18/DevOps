@@ -18,15 +18,17 @@ spec:
     policyTypes:
     - Egress
     egress:
-    - to:
-    {{-if $egress.namespaceSelector }}
-        - namespaceSelector:
-            matchLabels:
-                name: {{ $egress.namespaceSelector quote }}
-    {{- end -}}
-    {{- if $egress.subnets }}
-    {{- range $subnet := $egress.subnets }}
-        - ipBlock:
-          cidr: {{ $subnet }}
-{{- end }}
-{{- end }}
+        - to:
+            {{-if $egress.namespaceSelector }}
+            - namespaceSelector:
+                matchLabels:
+                    name: {{ $egress.namespaceSelector quote }}
+            {{- end -}}
+            {{- if $egress.subnets }}
+            {{- range $subnet := $egress.subnets }}
+            - ipBlock:
+            cidr: {{ $subnet }}
+            {{- end }}
+            {{- end }}
+        ports:
+            
