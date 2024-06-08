@@ -9,9 +9,9 @@ While you could use kubectl or similar CLI-based tools mapped to API calls to ma
 - Graph of relationships - Terraform understands relationships between resources which may help in scheduling - e.g. Terraform won't try to create a service in a Kubernetes cluster until the cluster exists.
 
 ## Terraform Folder Structure
-terraform-project/
-│
-├── main.tf # Primary configuration file
+terraform-project/ <br>
+│ <br>
+├── main.tf # Primary configuration file <br>
 ├── variables.tf # Variable definitions
 ├── outputs.tf # Output definitions
 ├── terraform.tfvars # Values for the variables
