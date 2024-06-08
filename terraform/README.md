@@ -7,3 +7,22 @@ While you could use kubectl or similar CLI-based tools mapped to API calls to ma
 - Full lifecycle management - Terraform doesn't just initially create resources, but offers a single command to create, update, and delete tracked resources without needing to inspect the API to identify those resources.
 - Synchronous feedback - While asynchronous behavior is often useful, sometimes it's counter-productive as the job of identifying operation results (failures or details of created resource) is left to the user. e.g. you don't have the IP/hostname of the load balancer until it has finished provisioning, hence you can't create any DNS record pointing to it.
 - Graph of relationships - Terraform understands relationships between resources which may help in scheduling - e.g. Terraform won't try to create a service in a Kubernetes cluster until the cluster exists.
+
+## Terraform Folder Structure
+terraform-project/
+│
+├── main.tf # Primary configuration file
+├── variables.tf # Variable definitions
+├── outputs.tf # Output definitions
+├── terraform.tfvars # Values for the variables
+├── provider.tf # Provider configurations
+├── modules/ # Directory for reusable modules
+│ └── module_name/ # Example module
+│ ├── main.tf
+│ ├── variables.tf
+│ └── outputs.tf
+├── environments/ # Environment-specific configurations
+│ └── dev/
+│ ├── main.tf
+│ ├── variables.tf
+│ └── outputs.tf
