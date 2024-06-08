@@ -32,7 +32,7 @@ Several sample Dockerfiles can be found in this [docker folder](https://github.c
 
 
 <a name="contributing"></a>  
-## Project Maintainers & Contributors
+## Maintainers & Contributors
 To contribute in this repository please follow the [CONTRIBUTING.md](https://github.com/kishalayb18/DevOps/blob/main/CONTRIBUTING.md) or contact to [Kishalay Bhattacharya](https://www.linkedin.com/in/connect-with-kishalay-bhattacharya/)
 <table>
   <tr>
