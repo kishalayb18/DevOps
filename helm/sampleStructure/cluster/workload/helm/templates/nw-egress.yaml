@@ -1,0 +1,23 @@
+{{- range $netpol := $.Values.networkPolicy.egress }}
+apiVersion: networking.k8s.io.v1
+kind: NetworkPolicy
+metadata:
+    name: {{ $netpol.name }}
+    namespace: {{ $netpol.namespace }}
+spec:
+    podSelector: {}
+    policyType:
+    - Egress
+    egress:
+    - to:
+{{- range $subnet := $netpol.subnets }}
+    - ipBlock:
+        cidr: {{ $subnet }}
+{{- end }}
+    ports:
+{{- range $port := $netpol.ports }}
+    - protocol: TCP
+    port: {{ $port }}
+{{- end }}
+---
+{{- end }}

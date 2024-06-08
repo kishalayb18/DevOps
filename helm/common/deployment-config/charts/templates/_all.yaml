@@ -1,0 +1,21 @@
+{{*/
+Main entrypoint for the common library chart 
+this will render all underlying templates based on the provided values
+*/}}
+{{- define "common.appSpec" }}
+    {{- if .Values.deployment }}
+        {{- include "common.deployment" . | nindent 0 }}
+    {{- end }}
+    {{- if .Values.pdb }}
+        {{- include "common.podDisruptionBudget" . | nindent 0 }}
+    {{- end }}
+    {{- if .Values.hpa }}
+        {{- include "common.horizontalPodAutoscaler" . | nindent 0 }}
+    {{- end }}
+    {{- if .Values.serviceAccount }}
+        {{- include "common.serviceAccount" . | nindent 0 }}
+    {{- end }}
+    {{- if .Values.service }}
+        {{- include "common.service" . | nindent 0 }}
+    {{- end }}
+{{- end }}

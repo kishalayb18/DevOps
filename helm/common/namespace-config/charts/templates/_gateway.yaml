@@ -1,0 +1,35 @@
+{{/*
+gateway template
+*/}}
+{{- define "common.gateway" }}
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: {{ .Values.helmArgs.namespace }}-gw
+  labels:
+    helm.sh/chart: {{ printf "%s-%s" .Chart.name .Chart.version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
+    environment: {{ .Values.helmArgs.targetEnv }}
+spec:
+  selector:
+    istio: {{ .Values.gateway.ingressTargetLabel }}
+  servers:
+  - hosts:
+  {{- range $appName:= .Values.gateway.app }}
+  {{-if eq "prod" $.Values.helmArgs.targetEnv }}
+    {{- if &.Values.gateway.appHostDomain }}
+    - {{ $appName }}.{{ $.Values.gateway.appHostDomain }}
+    {{- end }}
+    - {{ $appName }}.{{ $.Values.gateway.k8sHostDomain }}
+  {{- else }}
+    {{- if $.Values.gateway.appHostDomain }}
+    - {{ $appName }}-{{ .Values.helmArgs.targetEnv }}.{{ .Values.gateway.k8sHostDomain }}
+  {{- end }}
+  {{- end }}
+    port:
+      name:  {{ default "https" .Values.gateway.serverPortName }}
+      number: {{ default 443 .Values.gateway.serverPortNumber }}
+      protocol: {{ default "HTTPS" .Values.gateway.serverPortProtocol }}
+    tls:
+      credentialName: {{ .Values.gateway.tlsCredentialName }}
+      mode: {{ default "SIMPLE" .Values.gateway.tlsMode }}
+{{- end }}

@@ -1,0 +1,75 @@
+{{/*
+this is the deployment template
+*/}}
+{{- define "common.deployment" -}}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: {{ include "app.name" . }}
+    labels: 
+        {{ include "app.labels" | nindent 8 }}
+    annotations:
+        rollme: {{ randAlphaNum 5 | quote }}
+spec:
+    progressDeadlineSeconds: 600
+    revisionHistoryLimit: 10
+    replicas: {{ .Values.deployment.replicas }}
+    selector:
+        matchLables:
+            {{- include "app.selectorLables" . | nindent 6 -}}
+    strategy:
+        type: {{ default "RollingUpdate" .Values.deployment.strategy }}
+        rollingupdate:
+            maxSurge: {{ default "40%" .Values.deployment.maxSurge }}
+            maxUnavailable: {{ default "25%" .Values.deployment.maxUnavailable }}
+    template:
+        metadata:
+            lables:
+                {{- include "app.selectorLables" . | nindent 16 }}
+            annotations:
+                rollme: {{ randAlphaNum 5 | quote }}
+                {{- include "deployment.annotations" | indent 16 }}
+        spec:
+            dnsPolicy: {{ default "ClusterFirst" .Values.deployment.dnsPolicy }}
+            {{- include "deployment.restartPolicy" . | indent 12 -}}
+            terminationGracePeriodSeconds: {{ default 30 .Values.deployment.terminationGracePeriodSeconds }}
+            {{- include "deployment.serviceAccount" . | indent 12 -}}
+            {{- include "deployment.affinity" . | indent 12 -}}
+            {{- if eq (.Values.vault).installAsInitContainer "true" -}}
+            initContainers:
+            {{- include "vault.installAsInitContainer" . | indent 12 -}}
+            {{- end -}}
+            containers:
+            {{- if .Values.cloudSqlProxy -}}
+            {{- include "app.cloudSqlProxy" . | indent 12 -}}
+            {{- end -}}
+            - name: {{- include "app.name" . -}}
+              image: {{ .Values.container.imageName }}:{{ .Values.container.imageTag }}
+              imagePullPolicy: IfNotPresent
+              {{- include "container.resources" . | nindent 14 -}}
+              {{- include "container.ports" | nindent 14 -}}
+              {{- if .Values.container.runAs -}}
+              {{- include "container.securityContext" . | nindent 14 -}}
+              {{- end -}}
+              {{- if .Values.container.command -}}
+              {{- include "container.command" . | nindent 14 -}}
+              {{- end -}}
+              {{- if .Values.container.args -}}
+              {{- include "container.args" . | nindent 14 -}}
+              {{- end -}}
+              {{- if .Values.container.env -}}
+              {{- include "container.env" . | nindent 14 -}}
+              {{- end -}}
+              {{- include "container.livenessProbe" -}}
+              {{- include "container.readinessProbe" -}}
+              {{- if .Values.container.workingDir -}}
+              workingDir: {{ .Values.container.workingDir }}
+              {{- end -}}
+              {{- include "container" . | nindent 14 -}}
+              {{- if .Values.container.vloumeMounts -}}
+              {{- include "container.volumeMounts" . | nindent 14 -}}
+              {{- end -}}
+            {{- if .Values.container.volumeMounts -}}
+            {{- include "container.volumes" . | nindent 12 -}}
+            {{- end -}}
+{{- end -}}
