@@ -20,4 +20,18 @@ It is an API interface that programs can use to talk to the daemon and provide t
 
 ### Docker CLI  
 A command line interface (CLI), Where we are running the docker commands such as managing images, stopping or starting contaniers, and so on.  
+
 ## Docker File Inastructions  
+
+***
+| Instruction | Argument |  
+|:-----|:------:|  
+|FROM       |    Start from a base OS or another Image  |
+|LABEL      |    Adding labels to the container    |
+|RUN        |    Install All dependecies      |
+|WORKDIR    |    Changing the source directory    |
+|COPY       |    Sopy Source Code    |
+|CMD        |    Commands to execute    |
+*** 
+
+  
