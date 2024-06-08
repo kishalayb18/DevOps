@@ -1,13 +1,18 @@
 # DevOps 
-#### _This repository contains topics related to DevOps tools_
-#### _To contribute in this repository please follow the [CONTRIBUTING.md](https://github.com/kishalayb18/DevOps/blob/main/CONTRIBUTING.md) or contact to [Kishalay Bhattacharya]_(https://www.linkedin.com/in/connect-with-kishalay-bhattacharya/)
+_This repository contains topics related to DevOps tools_
+#### To contribute in this repository please follow the [CONTRIBUTING.md](https://github.com/kishalayb18/DevOps/blob/main/CONTRIBUTING.md) or contact to [Kishalay Bhattacharya](https://www.linkedin.com/in/connect-with-kishalay-bhattacharya/)
 
-### Topics
-- [Kubernetes Deployments](#Kubernetes-Deployments)
-- [Helm](#)
-- [Docker](#)
-- [Terraform](#)
-- [Jenkins](#)
+## Table of Contents
+- Topics
+  - [Kubernetes Deployments](#Kubernetes-Deployments)
+  - [Helm](#)
+  - [Docker](#)
+  - [Terraform](#)
+  - [Jenkins](#)
+-  
+ 
+## Topics:
+Each folder here contains a detailed hands-on guide on the specific DevOps tool. Visit each folder to learn more.
 
 ### Kubernetes Deployments
 This [folder](https://github.com/kishalayb18/DevOps/tree/main/k8s-deployment) contains several concepts related to Kubernetes-Deployments
@@ -22,3 +27,13 @@ Several sample Dockerfiles can be found in this [folder](https://github.com/kish
 ### Terraform
 
 ### Jenkins
+
+<a name="contributing"></a>  
+## Project Maintainers & Contributors
+To contribute in this repository please follow the [CONTRIBUTING.md](https://github.com/kishalayb18/DevOps/blob/main/CONTRIBUTING.md) or contact to [Kishalay Bhattacharya](https://www.linkedin.com/in/connect-with-kishalay-bhattacharya/)
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/kishalayb18"><img src="https://avatars.githubusercontent.com/u/64585126?s=400&u=4f54035173c78d29fb38c3083be64e2f80a66afa&v=4" width="100px;" alt="Kishalay Bhattacharya"/><br /><sub><b>Kishalay Bhattacharya</b></sub></a></td>
+  </tr>
+</table>  
+
