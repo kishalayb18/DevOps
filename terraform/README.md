@@ -12,17 +12,17 @@ While you could use kubectl or similar CLI-based tools mapped to API calls to ma
 terraform-project/ <br>
 │ <br>
 ├── main.tf # Primary configuration file <br>
-├── variables.tf # Variable definitions
-├── outputs.tf # Output definitions
-├── terraform.tfvars # Values for the variables
-├── provider.tf # Provider configurations
-├── modules/ # Directory for reusable modules
-│ └── module_name/ # Example module
-│ ├── main.tf
-│ ├── variables.tf
-│ └── outputs.tf
-├── environments/ # Environment-specific configurations
-│ └── dev/
-│ ├── main.tf
-│ ├── variables.tf
-│ └── outputs.tf
+├── variables.tf # Variable definitions<br>
+├── outputs.tf # Output definitions<br>
+├── terraform.tfvars # Values for the variables<br>
+├── provider.tf # Provider configurations<br>
+├── modules/ # Directory for reusable modules<br>
+│ └── module_name/ # Example module<br>
+│ ├── main.tf<br>
+│ ├── variables.tf<br>
+│ └── outputs.tf<br>
+├── environments/ # Environment-specific configurations<br>
+│ └── dev/<br>
+│ ├── main.tf<br>
+│ ├── variables.tf<br>
+│ └── outputs.tf<br>
