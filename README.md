@@ -1,6 +1,5 @@
 # DevOps 
 _This repository contains topics related to DevOps tools_
-#### To contribute in this repository please follow the [CONTRIBUTING.md](https://github.com/kishalayb18/DevOps/blob/main/CONTRIBUTING.md) or contact to [Kishalay Bhattacharya](https://www.linkedin.com/in/connect-with-kishalay-bhattacharya/)
 
 ## Table of Contents
 - Topics
@@ -9,24 +8,28 @@ _This repository contains topics related to DevOps tools_
   - [Docker](#)
   - [Terraform](#)
   - [Jenkins](#)
--  
+-  Project Maintainers & Contributors
  
 ## Topics:
 Each folder here contains a detailed hands-on guide on the specific DevOps tool. Visit each folder to learn more.
 
 ### Kubernetes Deployments
-This [folder](https://github.com/kishalayb18/DevOps/tree/main/k8s-deployment) contains several concepts related to Kubernetes-Deployments
-> single container, pv, pvc, taint, tolerance, hpa
+This [kubernetes folder](https://github.com/kishalayb18/DevOps/tree/main/k8s-deployment) contains several concepts related to Kubernetes-Deployments
+- single container
+- pv, pvc
+- taint, tolerance
+- hpa
 
 ### Helm
-This [folder](https://github.com/kishalayb18/DevOps/tree/main/helm) have multiple dynamic helm charts that can be leveraged
+This [Helm folder](https://github.com/kishalayb18/DevOps/tree/main/helm) have multiple dynamic helm charts that can be leveraged
 
 ### Docker
-Several sample Dockerfiles can be found in this [folder](https://github.com/kishalayb18/DevOps/tree/main/docker) which can containerize microservices
+Several sample Dockerfiles can be found in this [docker folder](https://github.com/kishalayb18/DevOps/tree/main/docker) which can containerize microservices
 
 ### Terraform
 
 ### Jenkins
+
 
 <a name="contributing"></a>  
 ## Project Maintainers & Contributors
