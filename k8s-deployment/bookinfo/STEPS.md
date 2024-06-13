@@ -28,10 +28,9 @@ kubectl get deployments -n istio-system --output wide
 
 kubectl create namespace istio-ingress
 
-helm install istio-ingress istio/gateway -n istio-ingress --wait
-istio-system
+helm install istio-ingress istio/gateway -n istio-system
 
-istio-ingress -n istio-ingress
+ helm uninstall istio-ingress -n istio-system
 ```
 
 # [Setup Istioctl](https://vmacwrites.wordpress.com/2019/02/06/istio-on-windows-10/)
@@ -98,7 +97,7 @@ helm install --namespace istio-system --set auth.strategy="anonymous" --repo htt
 helm uninstall --namespace istio-system kiali-server
  ```
 
-http://192.168.59.101:31417/productpage
+http://192.168.59.101:30880/productpage
 
 31473
 31417
