@@ -46,3 +46,5 @@
  - What: Instead of updating existing deployments, create new ones every time.
  - How: Use unique tags for container images and manage routing through Kubernetes services.
  - Why: Simplifies rollback and ensures complete traceability.
+
+![Kubernetes Deployment Strategies](https://media.licdn.com/dms/image/D4D22AQEbeCgjiT7F3w/feedshare-shrink_800/0/1700393481062?e=1703116800&v=beta&t=bV3Bgw2eZVyh-H7sEVcShVG4Emd_AS_wc264yzj0vco)
