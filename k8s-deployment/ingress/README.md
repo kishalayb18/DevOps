@@ -14,21 +14,21 @@ minikube addons enable ingress
 
 ## Step 2: Create Deployment, Service and the ingress resources using the YAML Files
 Follow the deployment, service, ingress yaml files in this very folder.
-create a seperate namespace
+- create a seperate namespace
 ```
 kubectl create ns page-tst
 ```
-Deployed the application.
+- Deployed the application.
 ```
 kubectl apply -f deployment.yaml -n page-tst
 ```
-Exposed the application as a ClusterIP service.
+- Exposed the application as a ClusterIP service.
 ```
-kubectl apply -f nginx-service.yaml -n page-tst
+kubectl apply -f service.yaml -n page-tst
 ```
-Configured an Ingress resource to route traffic to the service.
+- Configured an Ingress resource to route traffic to the service.
 ```
-kubectl apply -f nginx-ingress.yaml -n page-tst
+kubectl apply -f ingress.yaml -n page-tst
 ```
 
 ## Step 3: Update the Hosts File
