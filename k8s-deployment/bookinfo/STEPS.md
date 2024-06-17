@@ -1,39 +1,53 @@
-# [Platform Setup](https://istio.io/latest/docs/setup/platform-setup/minikube/#prerequisites)
+## [Platform Setup](https://istio.io/latest/docs/setup/platform-setup/minikube/#prerequisites)
 
 ```
 minikube start --memory=4500 --cpus=4 --vm-driver=virtualbox
 ```
 
-# Setup the ServiceMesh to the Cluster
+## Setup the ServiceMesh to the Cluster
 ```
 helm repo add istio https://istio-release.storage.googleapis.com/charts
-
+```
+```
 helm repo update
-
+```
+```
 kubectl create namespace istio-system
-
+```
+```
 helm install istio-base istio/base -n istio-system --set defaultRevision=default
-
+```
+```
 helm get all istio-base -n istio-system
-
+```
+```
 helm ls -n istio-system
-
+```
+```
 helm install istiod istio/istiod -n istio-system --wait
-
+```
+```
 helm ls -n istio-system
-
+```
+```
 helm status istiod -n istio-system
-
+```
+```
 kubectl get deployments -n istio-system --output wide
-
+```
+```
 kubectl create namespace istio-ingress
-
+```
+```
 helm install istio-ingress istio/gateway -n istio-system
-
+```
+```
  helm uninstall istio-ingress -n istio-system
+ helm uninstall istio-base  -n istio-system
+ helm uninstall istiod -n  istio-system
 ```
 
-# [Setup Istioctl](https://vmacwrites.wordpress.com/2019/02/06/istio-on-windows-10/)
+## [Setup Istioctl](https://vmacwrites.wordpress.com/2019/02/06/istio-on-windows-10/)
 
 ### Download Istio
 
@@ -50,7 +64,7 @@ helm install istio-ingress istio/gateway -n istio-system
 - To Check the version, run `istioctl version`
 
 
-# [Setup Gateways](https://istio.io/latest/docs/setup/additional-setup/gateway/)
+## [Setup Gateways](https://istio.io/latest/docs/setup/additional-setup/gateway/)
 ```
 kubectl create namespace istio-ingress
 kubectl apply -f ingress.yaml -n istio-ingress
@@ -89,13 +103,13 @@ To install the latest version of Kiali Server using Helm, run the following comm
 helm repo add kiali https://kiali.org/helm-charts
 helm repo update
 helm install --namespace istio-system --set auth.strategy="anonymous" --repo https://kiali.org/helm-charts kiali-server kiali-server
- istioctl dashboard kiali
- ```
- 
- - To uninstall
- ```
+istioctl dashboard kiali
+```
+
+- To uninstall
+```
 helm uninstall --namespace istio-system kiali-server
- ```
+```
 
 http://192.168.59.101:30880/productpage
 
