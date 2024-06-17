@@ -26,6 +26,15 @@ Here are key Istio features and tasks Envoy proxies enable:
 - Security and authentication: Envoy proxies enable Istio to enforce security policies, access control, and rate limiting. You can define it using the configuration API.
 - Pluggable extensions: this model is based on WebAssembly, which enables custom policy enforcement as well as telemetry generation for your mesh traffic
 
+## Key Features of Istio
+- Traffic Management: Istio simplifies the configuration of service-level properties like timeouts, retries, and circuit breakers, and also supports advanced deployment strategies such as canary releases, blue-green deployments, and mirroring.
+
+- Security: Istio provides defense-in-depth and zero-trust network security. It handles authentication, authorization, and encryption of service-to-service and end-user traffic.
+
+- Observability: Istio generates detailed telemetry data for all service communications, including metrics, logs, and traces, which help in monitoring and debugging microservices.
+
+- Policy Enforcement: It allows enforcing policies consistently across the services in your mesh, like rate limits, quotas, and access control
+
 ## BookInfo Deployment with Istio Service-mesh
 The Bookinfo application is broken into four separate microservices:
 
@@ -40,3 +49,8 @@ There are 3 versions of the reviews microservice:
 3. Version v3 calls the ratings service, and displays each rating as 1 to 5 red stars
 
 ![servicemeshbookinfo](servicemeshdiagrams/servicemeshbookinfo.png)
+
+## References:
+[Official Istio Documentation](https://istio.io/latest/docs/)
+[Istio architecture](https://www.solo.io/topics/istio/istio-architecture/)
+[Istio Tutorials and Samples](https://www.solo.io/topics/istio/istio-tutorial/)
