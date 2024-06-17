@@ -7,7 +7,7 @@ An Istio service mesh is logically split into a data plane and a control plane
 - The data plane is composed of a set of intelligent proxies (Envoy) deployed as sidecars. These proxies mediate and control all network communication between microservices. They also collect and report telemetry on all mesh traffic.
 - The control plane manages and configures the proxies to route traffic
 
-![IstioServicemeshArchitecture](diagrams/IstioServicemeshArchitecture.png)
+![IstioServicemeshArchitecture](servicemeshdiagrams/IstioServicemeshArchitecture.png)
 
 ### Control Plane
 The Istio control plane is built of three key components:
@@ -35,8 +35,8 @@ The Bookinfo application is broken into four separate microservices:
 4. ratings. The ratings microservice contains book ranking information that accompanies a book review.
 
 There are 3 versions of the reviews microservice:
-Version v1 doesn’t call the ratings service.
-Version v2 calls the ratings service, and displays each rating as 1 to 5 black stars.
-Version v3 calls the ratings service, and displays each rating as 1 to 5 red stars
+1. Version v1 doesn’t call the ratings service.
+2. Version v2 calls the ratings service, and displays each rating as 1 to 5 black stars.
+3. Version v3 calls the ratings service, and displays each rating as 1 to 5 red stars
 
-![servicemeshbookinfo](diagrams/servicemeshbookinfo.png)
+![servicemeshbookinfo](servicemeshdiagrams/servicemeshbookinfo.png)
