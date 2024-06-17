@@ -51,6 +51,6 @@ There are 3 versions of the reviews microservice:
 ![servicemeshbookinfo](servicemeshdiagrams/servicemeshbookinfo.png)
 
 ## References:
-[Official Istio Documentation](https://istio.io/latest/docs/)
-[Istio architecture](https://www.solo.io/topics/istio/istio-architecture/)
-[Istio Tutorials and Samples](https://www.solo.io/topics/istio/istio-tutorial/)
+- [Official Istio Documentation](https://istio.io/latest/docs/)
+- [Istio architecture](https://www.solo.io/topics/istio/istio-architecture/)
+- [Istio Tutorials and Samples](https://www.solo.io/topics/istio/istio-tutorial/)
