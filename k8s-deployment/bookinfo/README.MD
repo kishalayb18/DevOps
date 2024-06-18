@@ -2,12 +2,12 @@
 Istio is an open source service mesh solution that enables developers to connect, control, monitor, and secure microservices architectures
 
 ## Table of Contents
-- Istio Service-mesh Architecture
-- Security Architecture
-- Key Features of Istio
-- Mutual TLS authentication
-- BookInfo Deployment with Istio Service-mesh
-- References
+- [Istio Service-mesh Architecture](#istio-service-mesh-architecture)
+- [Security Architecture](#security-architecture)
+- [Key Features of Istio](#key-features-of-istio)
+- [Mutual TLS authentication](#mutual-tls-authentication)
+- [BookInfo Deployment with Istio Service-mesh](#bookinfo-deployment-with-istio-service-mesh)
+- [References](#references)
 
 ## Istio Service-mesh Architecture
 An Istio service mesh is logically split into a data plane and a control plane
@@ -71,8 +71,6 @@ There are 3 versions of the reviews microservice:
 2. Version v2 calls the ratings service, and displays each rating as 1 to 5 black stars.
 3. Version v3 calls the ratings service, and displays each rating as 1 to 5 red stars
 
-[Reference Documentation](https://istio.io/latest/docs/examples/bookinfo/)
-
 ![servicemeshbookinfo](servicemeshdiagrams/servicemeshbookinfo.png)
 
 ## References
@@ -80,3 +78,4 @@ There are 3 versions of the reviews microservice:
 - [Istio architecture](https://www.solo.io/topics/istio/istio-architecture/)
 - [Security Architecture](https://istio.io/latest/docs/concepts/security/)
 - [Istio Tutorials and Samples](https://www.solo.io/topics/istio/istio-tutorial/)
+- [BookInfo Deployment](https://istio.io/latest/docs/examples/bookinfo/)
