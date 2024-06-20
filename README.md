@@ -55,7 +55,7 @@ To contribute in this repository please follow the [CONTRIBUTING GUIDE](https://
 
 ### tst
 ## Maintainers & Contributors
-
+<div style="display: flex; justify-content: space-between;">
 <table>
   <tr>
     <td align="center">
@@ -86,3 +86,4 @@ To contribute in this repository please follow the [CONTRIBUTING GUIDE](https://
     </td>
   </tr>
 </table>
+</div>
