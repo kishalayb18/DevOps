@@ -53,3 +53,60 @@ To contribute in this repository please follow the [CONTRIBUTING GUIDE](https://
   </tr>
 </table>  
 
+### tst
+## Maintainers & Contributors
+
+<style>
+  .contributor-table {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  .contributor-row {
+    display: table-row;
+  }
+
+  .contributor-cell {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    padding: 10px;
+  }
+
+  .contributor-img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+  }
+
+  .contributor-info {
+    margin-top: 10px;
+  }
+</style>
+
+<div class="contributor-table">
+  <div class="contributor-row">
+    <div class="contributor-cell">
+      <a href="https://github.com/kishalayb18">
+        <img src="https://avatars.githubusercontent.com/u/64585126?s=400&u=4f54035173c78d29fb38c3083be64e2f80a66afa&v=4" class="contributor-img" alt="Kishalay Bhattacharya"/>
+        <div class="contributor-info">
+          <sub><b>Kishalay Bhattacharya</b></sub><br />
+          <sub>Role: Project Maintainer</sub><br />
+          <sub>Contributions: Project setup, Core functionalities, Code reviews</sub>
+        </div>
+      </a>
+    </div>
+    <div class="contributor-cell">
+      <a href="https://github.com/another-contributor">
+        <img src="https://avatars.githubusercontent.com/u/12345678?s=400&u=example&v=4" class="contributor-img" alt="Another Contributor"/>
+        <div class="contributor-info">
+          <sub><b>Another Contributor</b></sub><br />
+          <sub>Role: Contributor</sub><br />
+          <sub>Contributions: Documentation, Bug fixes, Feature development</sub>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
