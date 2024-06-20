@@ -56,9 +56,9 @@ To contribute in this repository please follow the [CONTRIBUTING GUIDE](https://
 ### tst
 ## Maintainers & Contributors
 
-<table style="display: inline-block; margin-right: 20px;">
+<table style="display: inline-block; width: 300px; margin-right: 20px; vertical-align: top;">
   <tr>
-    <td align="center">
+    <td align="center" style="padding: 10px;">
       <a href="https://github.com/kishalayb18">
         <img src="https://avatars.githubusercontent.com/u/64585126?s=400&u=4f54035173c78d29fb38c3083be64e2f80a66afa&v=4" width="100px" style="border-radius:50%;" alt="Kishalay Bhattacharya"/>
         <br />
@@ -67,13 +67,14 @@ To contribute in this repository please follow the [CONTRIBUTING GUIDE](https://
       <br />
       <sub>Role: Project Maintainer</sub>
       <br />
+      <sub>Contributions: Project setup, Core functionalities, Code reviews</sub>
     </td>
   </tr>
 </table>
 
-<table style="display: inline-block;">
+<table style="display: inline-block; width: 300px; vertical-align: top;">
   <tr>
-    <td align="center">
+    <td align="center" style="padding: 10px;">
       <a href="https://github.com/another-contributor">
         <img src="https://avatars.githubusercontent.com/u/12345678?s=400&v=4" width="100px" style="border-radius:50%;" alt="Another Contributor"/>
         <br />
@@ -82,6 +83,7 @@ To contribute in this repository please follow the [CONTRIBUTING GUIDE](https://
       <br />
       <sub>Role: Contributor</sub>
       <br />
+      <sub>Contributions: Documentation, Bug fixes, Feature development</sub>
     </td>
   </tr>
 </table>
