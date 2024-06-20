@@ -36,7 +36,20 @@ Several sample Dockerfiles can be found in this [docker folder](https://github.c
 To contribute in this repository please follow the [CONTRIBUTING GUIDE](https://github.com/kishalayb18/DevOps/blob/main/CONTRIBUTING.md) or contact to [Kishalay Bhattacharya](https://www.linkedin.com/in/connect-with-kishalay-bhattacharya/)
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/kishalayb18"><img src="https://avatars.githubusercontent.com/u/64585126?s=400&u=4f54035173c78d29fb38c3083be64e2f80a66afa&v=4" width="100px;" alt="Kishalay Bhattacharya"/><br /><sub><b>Kishalay Bhattacharya</b></sub></a></td>
+    <td align="center">
+      <a href="https://github.com/kishalayb18">
+        <img src="https://avatars.githubusercontent.com/u/64585126?s=400&u=4f54035173c78d29fb38c3083be64e2f80a66afa&v=4" width="100px;" alt="Kishalay Bhattacharya"/><br />
+        <sub>
+          <b>Kishalay Bhattacharya</b>
+        </sub>
+      </a><br />
+        <sub>
+          Role: Repository Owner, Project Maintainer
+        </sub><br />
+        <sub>
+          Contributions: Project setup, Core functionalities, Code reviews
+        </sub>
+    </td>
   </tr>
 </table>  
 
