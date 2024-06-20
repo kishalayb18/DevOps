@@ -82,7 +82,7 @@ These API groups have specific names and include additional and extended resourc
 - `autoscaling`: Resources for autoscaling, such as horizontalpodautoscalers.
 - `networking.k8s.io`: Resources related to networking, such as networkpolicies, ingresses
 
-#### 3. Verbs:
+### Verbs:
 Verbs define the specific operations allowed by a Role or ClusterRole on particular resources
 The `viewer` role might only need to read resources, so it uses verbs like _get_, _list_, and _watch_
 The `editor` role might need full control over resources, so it includes additional verbs like _create_, _update_, _patch_, _delete_
@@ -98,8 +98,14 @@ Here’s a brief overview of the most commonly used verbs:
 - `delete`: Allows deleting resources.
 - `deletecollection`: Allows deleting a collection of resources
 
-## Verify
-To get the resources via the service account
+## Verify the RBAC
+- To view whether certain permission is there with the service account
+> --as=system:serviceaccount:<namespace>:<service account name>`
+```
+kubectl auth can-i create deployments -n tst --as=system:serviceaccount:tst:viewer
+```
+This command should return yes if the permission is there
+- To get the resources via the service account
 `kubectl get <resourcetype> -n <namespace> --as=system:serviceaccount:<namespace>:<service account name>`
 ```
 kubectl get pods -n tst --as=system:serviceaccount:tst:viewer
