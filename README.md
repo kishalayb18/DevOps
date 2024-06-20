@@ -56,7 +56,7 @@ To contribute in this repository please follow the [CONTRIBUTING GUIDE](https://
 ### tst
 ## Maintainers & Contributors
 
-<table style="display: inline-block; width: 300px; margin-right: 20px; vertical-align: top;">
+<table style="display: inline-block; width: 300px; height: 300px; margin-right: 20px; vertical-align: top; border: 1px solid #ddd;">
   <tr>
     <td align="center" style="padding: 10px;">
       <a href="https://github.com/kishalayb18">
@@ -72,7 +72,7 @@ To contribute in this repository please follow the [CONTRIBUTING GUIDE](https://
   </tr>
 </table>
 
-<table style="display: inline-block; width: 300px; vertical-align: top;">
+<table style="display: inline-block; width: 300px; height: 300px; margin-right: 20px; vertical-align: top; border: 1px solid #ddd;">
   <tr>
     <td align="center" style="padding: 10px;">
       <a href="https://github.com/another-contributor">
