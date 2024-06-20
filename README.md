@@ -55,8 +55,8 @@ To contribute in this repository please follow the [CONTRIBUTING GUIDE](https://
 
 ### tst
 ## Maintainers & Contributors
-<div style="display: flex; justify-content: space-between;">
-<table>
+
+<table style="display: inline-block; margin-right: 20px;">
   <tr>
     <td align="center">
       <a href="https://github.com/kishalayb18">
@@ -69,9 +69,10 @@ To contribute in this repository please follow the [CONTRIBUTING GUIDE](https://
       <br />
       <sub>Contributions: Project setup, Core functionalities, Code reviews</sub>
     </td>
- </tr>
+  </tr>
 </table>
-<table>
+
+<table style="display: inline-block;">
   <tr>
     <td align="center">
       <a href="https://github.com/another-contributor">
@@ -86,4 +87,3 @@ To contribute in this repository please follow the [CONTRIBUTING GUIDE](https://
     </td>
   </tr>
 </table>
-</div>
