@@ -71,7 +71,6 @@ To contribute in this repository please follow the [CONTRIBUTING GUIDE](https://
             <br />
             <sub>Role: Project Maintainer</sub>
             <br />
-            <sub>Contributions: Project setup, Core functionalities, Code reviews</sub>
           </td>
         </tr>
       </table>
@@ -88,7 +87,6 @@ To contribute in this repository please follow the [CONTRIBUTING GUIDE](https://
             <br />
             <sub>Role: Contributor</sub>
             <br />
-            <sub>Contributions: Documentation, Bug fixes, Feature development</sub>
           </td>
         </tr>
       </table>
