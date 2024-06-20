@@ -69,6 +69,7 @@ To contribute in this repository please follow the [CONTRIBUTING GUIDE](https://
       <br />
       <sub>Contributions: Project setup, Core functionalities, Code reviews</sub>
     </td>
+    <td style="width: 50px;">&nbsp;</td> <!-- Spacer column -->
     <td align="center">
       <a href="https://github.com/another-contributor">
         <img src="https://avatars.githubusercontent.com/u/12345678?s=400&v=4" width="100px" style="border-radius:50%;" alt="Another Contributor"/>
