@@ -98,18 +98,34 @@ Here’s a brief overview of the most commonly used verbs:
 - `delete`: Allows deleting resources.
 - `deletecollection`: Allows deleting a collection of resources
 
+## Apply the RBAC Resources
+```
+kubectl apply -f .\editor-sa.yaml -f .\viewer-sa.yaml -f .\viewer-role.yaml -f .\editor-role.yaml -f .\editor-role-bindinding.yaml -f .\viewer-role-binding.yaml -n tst
+```
+
+### Clean up Command
+```
+kubectl delete -f .\viewer-sa.yaml -f .\editor-sa.yaml -f .\viewer-role-binding.yaml -f .\editor-role-bindinding.yaml -f .\editor-role.yaml -f .\viewer-role.yaml -n tst
+```
+
 ## Verify the RBAC
-- To view whether certain permission is there with the service account
-> --as=system:serviceaccount:<namespace>:<service account name>`
+- To view whether certain permission is there with the service account follow this command `kubectl auth can-i <resourcetype> -n <namespace> --as=system:serviceaccount:<namespace>:<service account name>`
+
+> while configuring RBAC on a service account use this `as` flag: --as=system:serviceaccount:_namespace_:_service account name_
 ```
 kubectl auth can-i create deployments -n tst --as=system:serviceaccount:tst:viewer
+kubectl auth can-i create deployments -n tst --as=system:serviceaccount:tst:editor
 ```
-This command should return yes if the permission is there
-- To get the resources via the service account
+> namespace name : `tst`
+> service account names : `viewer` , `editor`
+> This command should return `yes` if the permission is there with the service account
+
+- To get the resources via the service account follow this command
 `kubectl get <resourcetype> -n <namespace> --as=system:serviceaccount:<namespace>:<service account name>`
 ```
 kubectl get pods -n tst --as=system:serviceaccount:tst:viewer
 ```
+> change the `verb` (get) and the `resource type` (pods) based on the requirement
 
 ## RBAC Best Practices
 
