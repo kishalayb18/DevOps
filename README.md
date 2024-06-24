@@ -31,8 +31,6 @@ Several sample Dockerfiles can be found in this [docker folder](https://github.c
 ### Jenkins
 
 ## Maintainers & Contributors
-<a name="contributing"></a>  
-## Maintainers & Contributors
 To contribute in this repository please follow the [CONTRIBUTING GUIDE](https://github.com/kishalayb18/DevOps/blob/main/CONTRIBUTING.md) or contact to [Kishalay Bhattacharya](https://www.linkedin.com/in/connect-with-kishalay-bhattacharya/)
 <table>
   <tr>
