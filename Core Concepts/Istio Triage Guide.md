@@ -30,6 +30,6 @@ Traffic Communication between external services such as PingFed, MongoDB and Ora
 Along with Istio level ingress and egress control, to control traffic flow at the IP address or port level (OSI layer 3 or 4), Kubernetes Network Policies are applied in Namespace Lavel. Network Policies are an application-centric construct which allow to specify how a pod is allowed to communicate with various network "entities" over the network Network Policies apply to a connection with a pod on one or both ends, and are not relevant to other connections.
 
 Below are the conditions where network policies are generally used for Tenant PODS. POD traffic can traverse through a combination of the following 3. identifiers. Along with this wheh detining a pod- or namespace- based NetworkPolicy, at times selectors are also utilised to specify what traffic is allowed to and from the Pod(s) that match the selector.
-- 1. All PODS within a namespace are allowed to communicated by using a network policy "Allow all-Network policy" 
+- All PODS within a namespace are allowed to communicated by using a network policy "Allow all-Network policy" 
 - PODS in separate namespaces but part of same istio mesh via Ingress and Egress Network policy on specific ports.
-- PODS to external service traffic communication such as for API Mesh, Mongo DB via egress network policy with traffic restricting to destination CIDR and port,
+- PODS to external service traffic communication such as for API Mesh, Mongo DB via egress network policy with traffic restricting to destination CIDR and port
