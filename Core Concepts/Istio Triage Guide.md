@@ -12,17 +12,17 @@ Service Entry | All outbound traffic from an Istio-enabled Pod is redirected to 
 
 ## Traffic Communication Pattern:
 
-###1. Traffic communications between PODS within same Namespace
+### 1. Traffic communications between PODS within same Namespace
 Recommended practice for PODs communicating within same namespace is to communicate using service name of the pod i.e. `<podname>.svc.cluster.local` instead of using _pods ingress url_ to communicate locally
 
-###2. Namespace to Namespace Traffic communications within Istio Mesh
+### 2. Namespace to Namespace Traffic communications within Istio Mesh
 Traffic communication between namespaces with in the mesh happens via istio-proxy container (Envoy Proxy) of the pod. Sidecar describes the configuration of the sidecar proxy that mediates inbound and outbournd comimunication to the workload instance it is attached to. The Sidecar configuration will be used to fine tune the set of ports, protocols that the proxy will accept when forwarding traffic to and from the workload to flowing to and fro from all ports. In addition to this, when forwarding outbound traffic from workload instances, it will be restricted to a limited set of services that the proxy can reach. For communication between Pod Namespace but same ISTIO Mesh, configure `<podname>.<namesopacename>.svc.cluster.local`
 
-###3. Network Traffic communications between PODS within Mesh to GCP/AWS services outside of Mesh:
+### 3. Network Traffic communications between PODS within Mesh to GCP/AWS services outside of Mesh:
 
 Traffic Communication between, external service outside of Mesh such as vault, dynatrace but in either another cluster or other cloud services will happen through Istio. Service Entry for Egress connection and Istio In Gateway for ingress connection'as depicted in diagram: PODS _East-West_ and _North-South Traffic_  <br/>Along with this for the traffic going outside of the cluster, it might require to create NACL rule to allow ingress and egress traffic.
 
-###4. Network Traffic communications between PODS within Mesh to on-prem services outside of Mesh:
+### 4. Network Traffic communications between PODS within Mesh to on-prem services outside of Mesh:
 
 Traffic Communication between external services such as PingFed, MongoDB and Oracle DB running on-prem and PODS within Mesh will happen through Istio Ingress and Service Entry as depicted in diagram: "PODS and North-South Traffic" below. Along with this for the traffic going outside of GKE cluster where MLaaS PODS are hosted, it would require to create a firewall rule on GKE eluster to allow ingress and egress traffic.
 
