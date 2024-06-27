@@ -16,6 +16,11 @@ kubectl label nodes wmh-worker2 zone=wm-2
 kubectl label nodes wmh-worker3 zone=wl-3
 ```
 
+Verify whether the nodes have the right labels
+```
+kubectl get nodes --show-labels
+```
+
 3. Write the nodeaffinity section
 ```
 affinity:
@@ -31,11 +36,12 @@ affinity:
 
 4. Give random labels in the node affinity `matchExpressions` section
 - see the pod is getting scheduled to random nodes during the soft scheduling (_preferredDuringSchedulingIgnoredDuringExecution_)
-- see the pod is in pending state during hard scheduling (_requiredDuringSchedulingIgnoredDuringExecution_)
+- see the pod is in pending state during hard scheduling (_requiredDuringSchedulingIgnoredDuringExecution_)<br/>
 ` Warning  FailedScheduling  9s (x2 over 5m19s)  default-scheduler  0/4 nodes are available: 1 node(s) had untolerated taint {node-role.kubernetes.io/control-plane: }, 3 node(s) didn't match Pod's node affinity/selector. preemption: 0/4 nodes are available: 4 Preemption is not helpful for scheduling`
 
 5. Attach righ label to the  `matchExpressions` section, see that it is getting scheduled to the node that matches the label
 ```
+kubectl get nodes --show-labels
 kubectl get pod -o wide
 ```
 

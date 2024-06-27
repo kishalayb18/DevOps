@@ -58,29 +58,8 @@ spec:
             operator: In
             values:
             - wl-3
-            - wh-1    
-    # podAffinity:
-    #   preferredDuringSchedulingIgnoredDuringExecution:
-    #   - labelSelector:
-    #       matchExpressions:
-    #       - key: env
-    #         operator: In
-    #         values:
-    #         - np
-    #     topologyKey: kubernetes.io/hostname
-    # podAntiAffinity:
-    #   preferredDuringSchedulingIgnoredDuringExecution:
-    #   - weight: 100
-    #     podAffinityTerm:
-    #       labelSelector:
-    #         matchExpressions:
-    #         - key: trustzone
-    #           operator: In
-    #           values:
-    #           - wmh
-    #           - wlo
-    #       topologyKey: kubernetes.io/hostname
-
+            - wh-1
+            
 ---
 
 apiVersion: v1
