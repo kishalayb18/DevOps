@@ -9,7 +9,7 @@ Canonical Name Used to alias one domain name to another. It always points to ano
 ### MX (Mail Exchange) 
 This record holds the mail server details for the domain. In my case, I use two mail servers. Zoho for mailbox to receive emails in custom email id ex: contact@devopscube[.]com. AwS SES mail server for signup autoresponder and email marketing services.
 
-###TXT (Text) 
+### TXT (Text) 
 A type of DNS record that allows you to associate text information with a domain name. I use that record for domain verification with Zoho, SES, Google Search Console, etc. Also, have added dmarc, spf and DKIM information given by Zoho and AWS SES. These records are part of the TXT content and are very important for email deliverability.
 
 ### DKIM (DomainKeys ldentified Mail) 
