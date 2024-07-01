@@ -8,7 +8,7 @@ Just like processes, containers have different states throughout their lifecycle
 4. Stopped state
 5. Killed/Deleted state
 
-![docker container lifecycle](https://media.licdn.com/dms/image/D4D22AQEbeCgjiT7F3w/feedshare-shrink_800/0/1700393481062?e=1703116800&v=beta&t=bV3Bgw2eZVyh-H7sEVcShVG4Emd_AS_wc264yzj0vco)
+![docker container lifecycle](https://github.com/kishalayb18/DevOps/blob/kishalayb18-patch-1/docker/docker_notes/lifecycle.png)
 
 ---
 
