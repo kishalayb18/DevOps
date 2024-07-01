@@ -20,6 +20,12 @@ def index():
             return redirect('/')
     names = Name.query.all()
     return render_template('index.html', names=names)
+    # return render_template('index.html')
+
+@app.route('/names', methods=['GET'])
+def names():
+    names = Name.query.all()
+    return render_template('namelist.html', names=names)
 
 if __name__ == "__main__":
     with app.app_context():

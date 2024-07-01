@@ -1,0 +1,185 @@
+
+.outercontainer {
+    text-align: center;
+    background-color: #f5f2f2;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 75%;
+    z-index: 100;
+    color: #07927b;
+}
+
+header img {
+    width: 100%;
+    height: auto;
+}
+
+#message {
+    font-size: small;
+    color: #338cdf;
+}
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+}
+
+.container {
+    text-align: center;
+    background-color: #c5c4c4;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 2em;
+    color: #333;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+.cover-image {
+    width: 100%;
+    max-height: 30vh;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+}
+
+input[type="text"] {
+    padding: 10px;
+    flex: 1;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #338cdf;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+a {
+    display: block;
+    margin-top: 20px;
+    color: #338cdf;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+#nameList {
+    list-style-type: none;
+    padding: 0;
+}
+
+#nameList li {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+#nameList li input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+#nameList li button {
+    margin-left: auto;
+    background-color: #338cdf;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+#nameList li button:hover {
+    background-color: #338cdf;
+}
+
+footer {
+    margin-top: 20px;
+}
+
+#searchInput {
+    padding: 10px;
+    margin-bottom: 20px;
+    width: 80%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#deleteSelectedButton {
+    margin: 10px 0;
+    padding: 10px 20px;
+    background-color: #338cdf;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#deleteSelectedButton:hover {
+    background-color: #338cdf;
+}
+
+.controls {
+    display:inline-block;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.controls input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+table {
+    margin: 0 auto;
+    font-size: 1.05em;
+    color: rgb(11, 62, 75);
+    border-collapse: collapse;
+    width: 50%;
+}
+
+table, th, td {
+    border: 1px solid #333;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #d6f8d9;
+}
