@@ -2,7 +2,7 @@ from flask import Flask, request, redirect, render_template
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///names.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data/names.db'
 db = SQLAlchemy(app)
 
 class Name(db.Model):
