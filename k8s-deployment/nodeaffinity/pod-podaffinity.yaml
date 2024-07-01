@@ -1,0 +1,177 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: server
+  labels:
+    app: server
+    zone: mh
+spec:
+  containers:
+  - name: server
+    image: nginx
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: priority
+            operator: NotIn
+            values:
+            - low
+    podAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+              - key: zone
+                operator: In
+                values:
+                  - mh
+          topologyKey: "kubernetes.io/hostname"
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: client
+  labels:
+    app: client
+    zone: mh
+spec:
+  containers:
+  - name: client
+    image: nginx
+  affinity:    
+    podAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+              - key: app
+                operator: In
+                values:
+                  - server
+          topologyKey: "kubernetes.io/hostname"
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: db0
+  labels:
+    app: db
+    zone: wl
+spec:
+  containers:
+  - name: db
+    image: nginx
+  affinity:
+    nodeAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 35
+          preference:
+            matchExpressions:
+            - key: priority
+              operator: NotIn
+              values:
+              - low
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+            - key: app
+              operator: In
+              values:
+              - db
+          topologyKey: kubernetes.io/hostname
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: db1
+  labels:
+    app: db
+spec:
+  containers:
+  - name: db
+    image: nginx
+  affinity:
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+            - key: app
+              operator: In
+              values:
+              - db
+          topologyKey: kubernetes.io/hostname
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: db2
+  labels:
+    app: db
+    zone: wl
+spec:
+  containers:
+  - name: db
+    image: nginx
+  affinity:
+    nodeAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 100
+          preference:
+            matchExpressions:
+            - key: priority
+              operator: NotIn
+              values:
+              - low
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+            - key: app
+              operator: In
+              values:
+              - db
+          topologyKey: kubernetes.io/hostname
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: db3
+  labels:
+    app: db
+    zone: wl
+spec:
+  containers:
+  - name: db
+    image: nginx
+  affinity:
+    nodeAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+        - weight: 35
+          preference:
+            matchExpressions:
+            - key: priority
+              operator: NotIn
+              values:
+              - low
+    podAntiAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchExpressions:
+            - key: app
+              operator: In
+              values:
+              - db
+          topologyKey: kubernetes.io/hostname

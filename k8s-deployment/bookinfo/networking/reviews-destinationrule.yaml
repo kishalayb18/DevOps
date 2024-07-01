@@ -1,0 +1,25 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: reviews-destinationrule
+spec:
+  # FQDN of the reviews service
+  host: reviews.wrk-ops.svc.cluster.local
+  # defining traffic policy here would impact all the subsets to use this loadblancer policy
+  trafficPolicy:
+    loadBalancer:
+    # PASSTHROUGH will route traffic to the hosts that has fewer active requets
+      simple: PASSTHROUGH
+  subsets:
+  # name of the subset shold match with the name of the subset we provide to the virtual service configuration in the destination block
+  - name: v1
+    labels:
+    # the labels should match with the labels of the different versions of deployments
+      version: v1
+  - name: v2
+    labels:
+      version: v2
+      # defining loadbalancer policy at the subset level, so only this loadbalacer has this policy type
+      trafficPolicy:
+        loadBalancer:
+          simple: RANDOM

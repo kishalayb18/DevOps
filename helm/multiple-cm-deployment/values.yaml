@@ -1,0 +1,25 @@
+name: nginx
+replicaCount: 1
+
+namespace: default
+
+container:
+  name: nginx 
+  image: nginx
+  port: 80
+
+service:
+  name: nginx-svc
+  type: NodePort
+  port: 80
+  targetPort: 80
+  nodePort: 31000
+
+config:
+  - name: firstcm
+    data: firstcmdatahere
+  - name: secondcm
+    data: secondcmdatahere
+  - name: thirdcm
+    data: thirdcmdatahere
+    

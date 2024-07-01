@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: page-kishalay
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: page-kishalay
+  template:
+    metadata:
+      labels:
+        app: page-kishalay
+    spec:
+      containers:
+      - name: page-kishalay
+        image: kishalayb18/page_kishalay:v1
+        ports:
+        - containerPort: 80

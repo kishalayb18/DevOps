@@ -1,0 +1,17 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: bookinfo-gateway
+spec:
+  # The selector matches the ingress gateway pod labels.
+  # If you installed Istio using the istioctl, this would be "istio: ingressgateway"
+  # If you installed Istio using Helm, this would be "istio: ingress"
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
