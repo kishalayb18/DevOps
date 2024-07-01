@@ -1,0 +1,48 @@
+{{/*
+ within the common library.
+*/}}
+{{- define "common.serviceEntrySpec" }}
+{{- range $serviceEntry := $.Values.serviceEntry }}
+apiVersion: networking.istio.io/vibetal
+kind: ServiceEntry
+metadata:
+    {{- if ($serviceEntry).name }}
+    name: {{ $serviceEntry.name }}
+    {{-end }}
+spec:
+    {{- if $serviceEntry.addresses }}
+    addresses:
+    {{- range $address := $serviceEntry.addresses }}
+    - {{ $address }}
+    {{- end }}
+    {{- end }}
+    {{- if $serviceEntry.endpoint Address }}
+    endpoints:
+    - address: {{ $serviceEntry.endpointAddress }}
+    {{- end }}
+    export To:
+    - .
+    hosts:
+    {{- range $post: $serviceEntry.hosts }}
+    - {{ $host quote }}
+    {{- end }}
+    location: MESH_EXTERNAL
+    ports:
+    {{- range Sport: $serviceEntry.ports }}
+    {{- if kindIs "map" $port }}
+    {{- range $port := $serviceEntry.ports }}
+    - name: {{ $port.name }}
+      number: {{ $port.port }}
+      protocol: {{ $port.protocol }}
+    {{- else }}
+    - name: tcp
+      number: {{ $port }}
+      protocol: TCP
+    {{- end }}
+    {{- end }}
+    {{- if $serviceEntry.resolution }}
+    resolution: {{ default "DNS" $serviceEntry.resolution }}
+    {{- end }}
+---
+{{- end }}
+{{- end }}

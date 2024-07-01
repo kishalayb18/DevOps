@@ -1,0 +1,36 @@
+{{/*
+service teamplate
+*/}}
+
+{{- define "common.service" -}}
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: {{ include "app.name" . }}
+    labels:
+        {{- include "app.labels . | nindent 8" -}}
+{{- if .Values.service.annotations -}}
+    annotations:
+        {{- toYaml .Values.service.annotations | nindent 8 -}}
+{{- end -}}
+spec:
+    sessionAffinity: None
+    type: {{ default "ClusterIP" .Values.service.type }}
+    selector:
+        {{- include "app.selectorLabels" . | nindent 8 -}}
+    ports:
+      {{- if .Values.service.ports -}}
+        {{- range .Values.service.ports -}}
+    - port: {{.}}
+      protocol: TCP
+      targetPort: {{.}}
+      name: port{{.}}
+        {{- end -}}
+      {{- else -}}
+    - port: 8080
+      protocol: TCP
+      targetPort: 8080
+      name: tcp
+      {{- end -}}
+{{- end -}}

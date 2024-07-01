@@ -1,0 +1,25 @@
+{{- range $gw:= $.Values.gateway }}
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  lables:
+    environment: {{ $gw.environment }}
+  name: {{ $gw.gatewayName }}
+  namespace: {{ $gatewayNamespace }}
+spec:
+  selector:
+    istio: {{ $gw.gw_ingress_target_label }}
+    servers:
+      - port:
+          name: {{ $gw.server.port.name }}
+          number: {{ $gw.server.port.number }}
+          protocol: {{ $gw.server.port.protocol }}
+        hosts:
+        {{- range $host:= $gw.servers.host_url }}
+        - {{ $host | quote }}
+        {{- end }}
+        tls:
+          credentialName: {{ $gw.servers.tls.credentialName }}
+          mode: {{ $gw.servers.tls.mode }}
+---
+{{- end }}
