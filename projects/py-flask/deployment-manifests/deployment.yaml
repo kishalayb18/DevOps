@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: flask-names-deployment
+  name: flask-names
 spec:
   replicas: 1
   selector:
@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: flask-names
-        image: flask-names:latest
+        image: kishalayb18/flask-names:v1
         resources:
           requests:
             memory: "128Mi"
