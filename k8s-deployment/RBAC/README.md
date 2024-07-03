@@ -14,8 +14,12 @@ Role-Based Access Control (RBAC) in Kubernetes allows you to dynamically configu
 
 ### Subjects
 
-Subjects are the entities that can perform actions on the resources, including:
-- Users: Typically external identities managed by an identity provider.
+Subjects are the entities that can perform actions on the resources, including
+1. User
+2. Group
+3. ServiceAccount
+
+- User: Typically external identities managed by an identity provider.
 
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -33,7 +37,7 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 
 ```
-- Groups: A collection of users, often defined in an identity provider like Active Directory.
+- Group: A collection of users, often defined in an identity provider like Active Directory.
 
 ```yaml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -50,8 +54,10 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
 
 ```
-- ServiceAccounts: Identities within the Kubernetes cluster
-```sh
+
+- ServiceAccount: Identities within the Kubernetes cluster
+
+```yaml
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
@@ -71,7 +77,8 @@ roleRef:
 ### apiGroups
 In Kubernetes, `apiGroups` are used to specify which API groups the RBAC rules apply to. API groups help organize the various API resources available in Kubernetes into logical groups. Each API group can contain multiple resource types, and different API groups are often versioned independently
 
-#### 1. Core API Group:
+#### 1. Core API Group
+
 - The core (or legacy) API group has an empty string "" as its name.
 - It includes essential resources like pods, services, nodes, namespaces, etc.
 
@@ -81,7 +88,7 @@ resources: ["pods", "services"]
 verbs: ["get", "list", "watch"]
 ```
 
-#### 2. Named API Groups:
+#### 2. Named API Groups
 
 These API groups have specific names and include additional and extended resources beyond the core group
 - `apps`: Resources for managing applications, such as deployments, statefulsets, and daemonsets.
@@ -90,7 +97,7 @@ These API groups have specific names and include additional and extended resourc
 - `autoscaling`: Resources for autoscaling, such as horizontalpodautoscalers.
 - `networking.k8s.io`: Resources related to networking, such as networkpolicies, ingresses
 
-### Verbs:
+### Verbs
 
 Verbs define the specific operations allowed by a Role or ClusterRole on particular resources
 The `viewer` role might only need to read resources, so it uses verbs like _get_, _list_, and _watch_
