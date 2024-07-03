@@ -1,0 +1,11 @@
+{{- range $config := .Values.config -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+    name: {{ printf "%s-configmap" $config.name | trunc 63 | quote }}
+    namespace: {{ $.Values.namespace }}
+data:
+    values: {{ $config.data | quote }}
+---
+{{- end -}}
+

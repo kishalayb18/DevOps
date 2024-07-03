@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-names
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-names
+  template:
+    metadata:
+      labels:
+        app: flask-names
+    spec:
+      containers:
+      - name: flask-names
+        image: kishalayb18/flask-names:v1
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "500m"
+          limits:
+            memory: "256Mi"
+            cpu: "1"
+        ports:
+        - containerPort: 5000
+        volumeMounts:
+        - mountPath: "/app/data"
+          name: sqlite-storage
+      volumes:
+      - name: sqlite-storage
+        persistentVolumeClaim:
+          claimName: sqlite-pvc

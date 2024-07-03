@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Name List</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
+    </head>
+    <body>
+        <header>
+            <img src="../static/images/cover.png" alt="Cover Image" class="cover-image">
+        </header>
+        <div class="outercontainer">
+            <div class="container">
+                <h1>Name List</h1><br/>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for name in names %}
+                            <tr>
+                                <td>{{ name.id }}</td>
+                                <td>{{ name.name }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <a href="http://localhost:5000">Go back</a>
+            </div>
+        </div>
+    </body>
+</html>
