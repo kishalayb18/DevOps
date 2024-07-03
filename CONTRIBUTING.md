@@ -1,18 +1,19 @@
-# Please follow the below steps to contribute to this repository
+# CONTRIBUTING GUIDE
 
-**1 Fork this repository**
+### Please follow the below steps to contribute to this repository
 
-**2 Make required changes**
+1. Fork this repository
 
-**3 Raise a pull request**
+2. Make required changes
 
-**4 Wait for PR review**
+3. Raise a pull request
 
-**5 Fix the suggested changes**
+4. Wait for PR review
 
-**6 Will merge the PR when the PR looks good**
+5. Fix the suggested changes
 
-> Please make sure you are providing detailed documentation on the changes,
-> so that it will be easier for others to leverage
+6. Will merge the PR when the PR looks good
 
-to fast track the PR review drop a note to [Kishalay](bhattacharyakishalay@gmail.com) with the PR link
+**Note** : Please make sure you are providing detailed documentation on the changes
+
+_to fast track the PR review drop a note to <bhattacharyakishalay@gmail.com> with the PR link_

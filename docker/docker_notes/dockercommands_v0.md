@@ -1,12 +1,4 @@
-# DOCKER
-
-### What is Docker?
-Docker is a platform that allows us to package our applications into deployable executables, called containers, with all its necessary OS libraries and dependencies
-
----
-
-### Docker images
-Docker images are light weight, standalone, executable package of software that includes everything needed(code, runtime, system tools, binaries, settings) to run an application
+# DOCKER COMMANDS
 
 **to build a new image**
 ```
@@ -133,29 +125,4 @@ docker inspect <docker container name or container id>
 **to view the resource  usage of a docker container**
 ```
 docker container stats
-```
-
-
-### Dockerhub Commands
----
-
-- login to Dockerhub
-```
-docker login
-```
-
-- pull image from Dockerhub
-```
-docker pull <image name>:<image version>
-```
-
-- rename the tag of the local image 
-```
-docker tag <local image name>:<local image version> <dockerhub username>/<local image name>:<local image version>
-docker tag hellokish:v1 kishalayb18/hellokish:v1
-```
-
-- push the renamed image to the Dockerhub
-```
-docker push <dockerhub username>/<image name>:<image version>
 ```
