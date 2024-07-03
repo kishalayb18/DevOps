@@ -1,0 +1,93 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: wh-pod
+  labels:
+    trustzone: wmh
+    env: np
+spec:
+  containers:
+  - name: wh-container
+    image: nginx
+  affinity:
+    nodeAffinity:
+      # requiredDuringSchedulingIgnoredDuringExecution:
+      #   nodeSelectorTerms:
+      #   - matchExpressions:
+      #     - key: priority
+      #       operator: In
+      #       values:
+      #       - mh
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 1
+        preference:
+          matchExpressions:
+          - key: zone
+            operator: In
+            values:
+            - wl-3
+            - wm-2
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: wm-pod
+  labels:
+    trustzone: wmh
+    env: np
+spec:
+  containers:
+  - name: wm-container
+    image: nginx
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: priority
+            operator: In
+            values:
+            - medium
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 1
+        preference:
+          matchExpressions:
+          - key: zone
+            operator: In
+            values:
+            - wl-3
+            - wh-1
+            
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: wl-pod
+  labels:
+    trustzone: wlo
+    env: np
+spec:
+  containers:
+  - name: wl-container
+    image: nginx
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: priority
+            operator: In
+            values:
+            - low
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 1
+        preference:
+          matchExpressions:
+          - key: zone
+            operator: In
+            values:
+            - wh-1
+            - wm-2
