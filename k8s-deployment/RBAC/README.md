@@ -2,17 +2,19 @@
 
 Role-Based Access Control (RBAC) in Kubernetes allows you to dynamically configure policies to enforce who can access specific resources and what operations they can perform. This documentation covers the basics of RBAC, including roles, role bindings, and how to apply RBAC to service accounts, users, and Active Directory (AD) groups. It also highlights best practices for managing RBAC in a Kubernetes cluster
 
-### Roles and ClusterRoles
+## RBAC Components
+
+### 1. Roles and ClusterRoles
 
 - Role: Defines permissions within a specific namespace.
 - ClusterRole: Defines permissions cluster-wide
 
-### RoleBindings and ClusterRoleBindings
+### 2. RoleBindings and ClusterRoleBindings
 
 - RoleBinding: Grants permissions defined in a Role to a user, group, or service account within a specific namespace.
 - ClusterRoleBinding: Grants permissions defined in a ClusterRole to a user, group, or service account cluster-wide
 
-### Subjects
+### 3. Subjects
 
 Subjects are the entities that can perform actions on the resources, including
 1. User
@@ -74,7 +76,7 @@ roleRef:
  
 ```
 
-### apiGroups
+### 4. apiGroups
 In Kubernetes, `apiGroups` are used to specify which API groups the RBAC rules apply to. API groups help organize the various API resources available in Kubernetes into logical groups. Each API group can contain multiple resource types, and different API groups are often versioned independently
 
 #### 1. Core API Group
@@ -97,7 +99,7 @@ These API groups have specific names and include additional and extended resourc
 - `autoscaling`: Resources for autoscaling, such as horizontalpodautoscalers.
 - `networking.k8s.io`: Resources related to networking, such as networkpolicies, ingresses
 
-### Verbs
+### 5. Verbs
 
 Verbs define the specific operations allowed by a Role or ClusterRole on particular resources
 The `viewer` role might only need to read resources, so it uses verbs like _get_, _list_, and _watch_
