@@ -29,10 +29,10 @@ Several sample Dockerfiles can be found in this [docker folder](https://github.c
 Best practices of IaC via Terraform have been portrayed in this [Terraform folder]() with multiple real-time scenarios.
 
 ### Jenkins
-CI/CD via Jenkins is widely leveraged, and some of the scenarios has show in this [Jenkins Folder]()
+CI/CD via Jenkins is widely leveraged, and some of the scenarios has been shown in this [Jenkins Folder]()
 
 ## Maintainers & Contributors
-To contribute to this repository please follow the [CONTRIBUTING GUIDE](https://github.com/kishalayb18/DevOps/blob/main/CONTRIBUTING.md) or contact to [Kishalay Bhattacharya](https://www.linkedin.com/in/connect-with-kishalay-bhattacharya/)
+To contribute to this repository please follow the [CONTRIBUTING GUIDE](https://github.com/kishalayb18/DevOps/blob/main/CONTRIBUTING.md) or contact [Kishalay Bhattacharya](https://www.linkedin.com/in/connect-with-kishalay-bhattacharya/)
 <table>
   <tr>
     <td align="center">
