@@ -45,3 +45,54 @@ ALBs work seamlessly with Auto Scaling groups, allowing for dynamic scaling of b
 #### 8. Health Checks:
 ALBs regularly perform health checks on backend targets, automatically routing traffic only to healthy instances, ensuring high availability
 
+
+## Network Load Balancer
+Network Load Balancers (NLBs) are pivotal elements in ensuring the seamless and efficient distribution of incoming network traffic across diverse servers or resources.
+Unlike their application-centric counterparts, NLBs operate at the transport layer, making them particularly adept at handling TCP and UDP traffic with a strong emphasis on performance, scalability, and fault tolerance. In this blog post, we'll explore various use cases and key features of Network Load Balancers
+
+### Example Use Cases
+
+#### 1. High-Performance Applications
+**Scenario** : Your application demands extremely low latency and high-throughput networking.
+**Use Case** : NLBs are optimized for ultra-high performance, making them ideal for applications requiring minimal latency and consistent, high-speed data transfer 
+
+####2. TCP/UDP Traffic Handling
+Scenario: Your application relies on protocols like TCP or UDP.
+Use Case: NLBs excel at handling both TCP and UDP traffic, making them suitable for a wide range of applications, including gaming, streaming, and IoT.
+
+#### 3. Internet-Facing Applications
+**Scenario** : You have internet-facing applications with a global user base.
+**Use Case** : NLBs support cross-zone load balancing and global acceleration, ensuring traffic is efficiently distributed across multiple regions to enhance the user experience.
+
+#### 4. Highly Available Databases
+**Scenario** : Your database infrastructure requires high availability and fault tolerance.
+**Use Case** : NLBs distribute database traffic across multiple database nodes, ensuring even load distribution and preventing any single node from becoming a performance bottleneck.
+
+#### 5. Custom Protocols and Ports
+**Scenario**: Your application uses non-standard protocols or ports.
+**Use Case**: NLBs offer flexibility by supporting custom protocols and ports, enabling load balancing for diverse applications with unique requirements
+
+### Key Features of Network Load Balancer
+#### 1. Layer 4 Load Balancing
+NLBs operate at the transport layer, providing efficient load balancing for TCP and UDP traffic.
+#### 2. Static IP Addresses:
+NLBs provide a static IP address, allowing you to maintain a consistent endpoint for your application even if backend resources are added or removed.
+#### 3. Cross-Zone Load Balancing
+NLBs can distribute traffic evenly across multiple Availability Zones, enhancing fault tolerance and improving the overall availability of your application.
+#### 4. Global Accelerator Integration:
+NLBs seamlessly integrate with AWS Global Accelerator, allowing you to leverage a single anycast IP address for your application across the globe.
+#### 5. Target Group Stickiness:
+NLBs support target group stickiness, ensuring that requests from a particular client are consistently routed to the same target, beneficial for session persistence.
+#### 6. Connection Draining:
+NLBs can gracefully handle the removal of instances from the load balancer, allowing in-flight requests to complete while directing new traffic to healthy instances.
+#### 7. TLS Termination for TCP Traffic:
+NLBs support TLS termination for TCP traffic, allowing you to offload SSL/TLS decryption from backend instances for improved performance
+#### 8. Health Checks:
+NLBs regularly perform health checks on backend targets, automatically directing traffic only to healthy instances to maintain high availability
+
+
+
+
+
+
+
