@@ -11,6 +11,7 @@ _CrashLoopBackOff_, _RunContainerError_, _KillContainerError_, _VerifyNonRootErr
 
 #### 1. CrashLoopBackOff :
 **Description**: A pod repeatedly crashes and restarts.
+
 Usually, a container can't start when:
 - There's an error in the application that prevents it from starting.
 - You misconfigured the container.
@@ -21,7 +22,8 @@ Usually, a container can't start when:
 - Investigate the application's start-up and initialization code.
 
 #### 2. ImagePullBackOff :
-**Description**: This error appears when hashtag#k8s isn't able to retrieve the image for one of the containers of the Pod
+**Description**: This error appears when hashtag#k8s isn't able to retrieve the image for one of the containers of the Pod<br/>
+
 **Troubleshooting** :
 - Verify the image name and tag.
 - The image that you're trying to retrieve belongs to a private registry and the cluster doesn't have credentials to access it
@@ -29,6 +31,7 @@ Usually, a container can't start when:
 
 #### 3. Pending Pods :
 **Description** : Pods remain in the "Pending" state and are not scheduled. <br/>
+
 **Troubleshooting** :
 - Check node resources (CPU, memory) to ensure there is enough capacity.
 - The current Namespace has a ResourceQuota object and creating the Pod will make the Namespace go over the quota
@@ -68,6 +71,7 @@ Usually, a container can't start when:
 
 #### 8. PersistentVolume Claims Pending :
 **Description** : PVCs remain in a "Pending" state.<br/>
+
 **Troubleshooting** :
 - Check if there are available PVs that match the PVC specifications.
 - Ensure the storage class exists and is configured correctly.
@@ -75,6 +79,7 @@ Usually, a container can't start when:
 
 #### 9. Pod Stuck Terminating :
 **Description** : Pods get stuck in a "Terminating" state.<br/>
+
 **Troubleshooting** :
 - Check for finalizers that might be preventing pod deletion.
 - Review the logs for shutdown hooks or long-running processes.
@@ -82,6 +87,7 @@ Usually, a container can't start when:
 
 #### 10. DNS Resolution Issues :
 **Description** : DNS lookups within the cluster fail.
+
 **Troubleshooting**:
 - Check the DNS pod logs (e.g., CoreDNS): `kubectl logs <coredns-pod>`.
 - Ensure the DNS service is running: `kubectl get svc -n kube-system`.
