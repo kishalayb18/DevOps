@@ -7,9 +7,10 @@ BASIC CONCEPTS OF K8S:
 3. Egress Rules: These define the allowed outgoing connections from the selected pods.
 4. Namespaces: Policies are typically applied within a specific namespace, helping to organize and manage resources efficiently.
 
-### Sample `ingress network policy`
+## Sample Network Policy Workflow Diagram
+![Kubernetes Deployment Strategies](https://github.com/kishalayb18/DevOps/blob/kishalayb18-patch-1/Core%20Concepts/png/networkpolicy.jfif)
 
-#### Allow frontend to backend traffic
+#### 1. Allow frontend to backend traffic
 This policy allows traffic from pods labeled `app: frontend` to reach pods labeled `app: backend`.
 
 ```yaml
@@ -29,7 +30,7 @@ spec:
  app: frontend
 ```
 
-#### Allow backend to database traffic
+#### 2. Allow backend to database traffic
 This policy permits traffic from pods labeled `app: backend` to access pods labeled `app: database`.
 
 ```yaml
@@ -49,7 +50,7 @@ spec:
  app: backend
 ```
 
-#### Restrict database access
+#### 3. Restrict database access
 This Policy denies all ingress (incoming) traffic to pods labeled as app: database. Empty ingress list specifies, no pods are allowed to connect to the database pods.
 
 ```yaml
@@ -64,6 +65,7 @@ spec:
  app: database
  ingress: []
 ```
+
 ## Best Practices
 1. Principle of Least Privilege: Only allow the minimum necessary access between pods. This reduces the risk of unauthorized access.
 2. Use Namespaces: Organize your resources and apply network policies within specific namespaces for better management and security.
