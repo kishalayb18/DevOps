@@ -38,6 +38,7 @@ Usually, a container can't start when:
 
 #### 4. RunContainerError
 **Description** : The error appears when the container is unable to start before the application<br/>
+
 **Troubleshooting** :
 - Mounting a not-existent volume such as ConfigMap or Secrets
 - Mounting a read-only volume as read-write
@@ -45,6 +46,7 @@ Usually, a container can't start when:
 
 #### 5. Node Not Ready:
 **Description** : One or more nodes are in a "NotReady" state.<br/>
+
 **Troubleshooting** :
 - Check node status: `kubectl describe node <node-name>`.
 - Review kubelet logs on the affected node.
@@ -52,6 +54,7 @@ Usually, a container can't start when:
 
 #### 6. Service Not Working
 **Description** : Services are not accessible or routing traffic correctly.<br/>
+
 **Troubleshooting** :
 - Check the service and endpoints: `kubectl get svc` and `kubectl get endpoints`.
 - Verify network policies and firewall rules.
