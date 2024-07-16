@@ -1,39 +1,78 @@
+# Kubernetes Troubleshooting Guide
+
+## Debugging Kubernetes Pod Failure
+Pods can have _startup_ and _runtime_ errors
+
+#### Startup Errors Includes
+- ImagePullBackoff
+- ImageInspectError
+- ErrImagePull
+- ErrImageNeverPull
+- RegistryUnavailable
+- InvalidImageName
+
+#### Runtime Error Includes
+- CrashLoopBackOff
+- RunContainerError
+- KillContainerError
+- VerifyNonRootError
+- RunInitContainerError
+- CreatePodSandboxError
+- ConfigPodSandboxError
+- KillPodSandboxError
+- SetupNetworkError
+- TeardownNetworkError
+
+
 1. **CrashLoopBackOff** :
 **Description**: A pod repeatedly crashes and restarts.
+Usually, a container can't start when:
+- There's an error in the application that prevents it from starting.
+- You misconfigured the container.
+- The Liveness probe failed too many times
 **Troubleshooting** :
 - Check pod logs: `kubectl logs <pod-name>`.
 - Describe the pod for more details: `kubectl describe pod <pod-name>`.
 - Investigate the application's start-up and initialization code.
 
 2. **ImagePullBackOff** :
-**Description**: Kubernetes cannot pull the container image from the registry.
+**Description**: This error appears when hashtag#k8s isn't able to retrieve the image for one of the containers of the Pod
 **Troubleshooting**:
 - Verify the image name and tag.
-- Check the image registry credentials.
-- Ensure the image exists in the specified registry.
+- The image that you're trying to retrieve belongs to a private registry and the cluster doesn't have credentials to access it
+- Ensure the image exists in the specified registry path.
 
 3. **Pending Pods** :
 **Description** : Pods remain in the "Pending" state and are not scheduled.
 **Troubleshooting** :
 - Check node resources (CPU, memory) to ensure there is enough capacity.
+- The current Namespace has a ResourceQuota object and creating the Pod will make the Namespace go over the quota
 - Ensure the nodes are labeled correctly if using node selectors or affinities.
+- The Pod is bound to a Pending PersistentVolumeClaim
 - Verify there are no taints on nodes that would prevent scheduling.
 
-4. Node Not Ready:
+4. **RunContainerError**
+**Description** : The error appears when the container is unable to start before the application
+**Troubleshooting** :
+- Mounting a not-existent volume such as ConfigMap or Secrets
+- Mounting a read-only volume as read-write
+- More detailed aspects can be found by describing the 'failed' pod
+
+5. Node Not Ready:
 **Description** : One or more nodes are in a "NotReady" state.
 **Troubleshooting** :
 - Check node status: `kubectl describe node <node-name>`.
 - Review kubelet logs on the affected node.
 - Ensure the node has network connectivity.
 
-5. Service Not Working
+6. Service Not Working
 **Description** : Services are not accessible or routing traffic correctly.
 **Troubleshooting** :
 - Check the service and endpoints: `kubectl get svc` and `kubectl get endpoints`.
 - Verify network policies and firewall rules.
 - Ensure the pods backing the service are healthy and running.
 
-6. **Insufficient Resources**:
+7. **Insufficient Resources**:
 **Description** : Pods cannot be scheduled due to insufficient resources.
 **Troubleshooting** :
 - Review resource requests and limits in pod specifications.
