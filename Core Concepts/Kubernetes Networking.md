@@ -22,3 +22,4 @@ Let's explore the key concepts and components of Kubernetes networking:
  - Kube-Proxy manages network rules for routing traffic to Services.
  - CoreDNS resolves DNS queries for Kubernetes Services and Pods.
 
+![Kubernetes Deployment Strategies](https://github.com/kishalayb18/DevOps/blob/kishalayb18-patch-1/Core%20Concepts/png/Kubernetes%20Networking.gif)
