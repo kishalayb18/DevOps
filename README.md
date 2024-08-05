@@ -3,35 +3,36 @@ _This repository contains topics related to DevOps tools_
 
 ## Table of Contents
 - Topics
+  - [Core Concepts](#Core-Concepts)
   - [Kubernetes Deployments](#Kubernetes-Deployments)
-  - [Helm](#)
-  - [Docker](#)
-  - [Terraform](#)
-  - [Jenkins](#)
+  - [Helm](#Helm)
+  - [Docker](#Docker)
+  - [Terraform](#Terraform)
+  - [Jenkins](#Jenkins)
 -  Project Maintainers & Contributors
  
 ## Topics:
 Each folder here contains a detailed hands-on guide on the specific DevOps tool. Visit each folder to learn more.
 
+### Core Concepts
 ### Kubernetes Deployments
 This [kubernetes folder](https://github.com/kishalayb18/DevOps/tree/main/k8s-deployment) contains several concepts related to Kubernetes-Deployments
-- single container
-- pv, pvc
-- taint, tolerance
-- hpa
+- single container, sidecar container, PV, PVC, node affinity, pod affinity, service mesh, ingress, hpa, taint, tolerance
 
 ### Helm
-This [Helm folder](https://github.com/kishalayb18/DevOps/tree/main/helm) have multiple dynamic helm charts that can be leveraged
+This [Helm folder](https://github.com/kishalayb18/DevOps/tree/main/helm) has multiple dynamic helm charts that can be leveraged
 
 ### Docker
 Several sample Dockerfiles can be found in this [docker folder](https://github.com/kishalayb18/DevOps/tree/main/docker) which can containerize microservices
 
 ### Terraform
+Best practices of IaC via Terraform have been portrayed in this [Terraform folder]() with multiple real-time scenarios.
 
 ### Jenkins
+CI/CD via Jenkins is widely leveraged, and some of the scenarios has been shown in this [Jenkins Folder]()
 
 ## Maintainers & Contributors
-To contribute in this repository please follow the [CONTRIBUTING GUIDE](https://github.com/kishalayb18/DevOps/blob/main/CONTRIBUTING.md) or contact to [Kishalay Bhattacharya](https://www.linkedin.com/in/connect-with-kishalay-bhattacharya/)
+To contribute to this repository please follow the [CONTRIBUTING GUIDE](https://github.com/kishalayb18/DevOps/blob/main/CONTRIBUTING.md) or contact [Kishalay Bhattacharya](https://www.linkedin.com/in/connect-with-kishalay-bhattacharya/)
 <table>
   <tr>
     <td align="center">
