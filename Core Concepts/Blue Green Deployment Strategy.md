@@ -1,7 +1,8 @@
-# Blue-Green Deployments
+# Blue-Green Deployment Strategy
 
-You might or might not know that Blue-green deployment is a technique for releasing applications with zero downtime and easy rollback. Yes, that’s the gist of it, at least conceptually.
-This guide will walk you through implementing blue-green deployments in a Kubernetes environment
+Blue-Green deployment Strategy is for releasing applications with zero downtime and easy rollback, this deployment strategy becomes crucial for critical customer-facing applications.
+
+This guide will walk you through implementing Blue-Green deployments in a Kubernetes
 
 ## Implementation Steps
 
@@ -61,7 +62,7 @@ spec:
 ```
 
 ### 2. Set Up Service and Ingress
-Create a service that can be switch between blue and green versions
+Create a service that can be switched between blue and green versions
 What ingress does is it maps the service to the load balancer, exposing the service externally. The load balancer then distributes traffic between the two deployments.
 
 service.yaml
@@ -138,17 +139,3 @@ kubectl patch service myapp-service -p '{"spec":{"selector":{"version":"blue"}}}
 ## Database Migrations with BG
 Database migrations in a blue-green deployment scenario are challenging because you need to maintain compatibility between the two versions of your application (blue and green) and the database schema. What we want is to perform these migrations without downtime and ensure both versions can operate correctly during the transition. which is damn easy :) (maybe)
 You can use any of your strategies. For database changes, you can use a migration tool that supports reversible migrations. *Run migrations before deploying the green version
-
-
-
-
-
-
-
-
-
-
-
-
-
-
