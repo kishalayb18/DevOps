@@ -99,5 +99,49 @@
 | URL      | Uniform Resource Locator |
 
 
+## Protocol Numbers
 
+Here is the table based on the provided format:
+
+| Protocol | Number |
+|----------|--------|
+| ICMP     | 1      |
+| IGMP     | 2      |
+| IPv4     | 4      |
+| TCP      | 6      |
+| EGP      | 8      |
+| IGP      | 9      |
+| RDP      | 27     |
+| IPv6     | 41     |
+| GRE      | 47     |
+| ICMPv6   | 58     |
+| EIGRP    | 88     |
+| OSPF     | 89     |
+| VRRP     | 112    |
+
+
+### A list of Internet socket port numbers used by protocols of Transport Layer of the Internet Protocol Suite for the establishment of host-to-host connectivity
+
+Here is the updated table with spaces included before the port numbers:
+
+| Protocol                | TCP | UDP | Port No. |
+|-------------------------|-----|-----|----------|
+| FTP data transfer        | Yes | No  |  20      |
+| FTP control              | Yes | No  |  21      |
+| SSH                      | Yes | No  |  22      |
+| Telnet                   | Yes | No  |  23      |
+| SMTP                     | Yes | No  |  25      |
+| DNS                      | Yes | Yes |  53      |
+| BOOTP Server (also used by DHCP) | No  | Yes |  67  |
+| BOOTP Client (also used by DHCP) | No  | Yes |  68  |
+| TFTP                     | No  | Yes |  69      |
+| HTTP                     | Yes | No  |  80      |
+| POP2                     | Yes | No  | 109      |
+| POP3                     | Yes | No  | 110      |
+| NTP                      | Yes | No  | 123      |
+| SNMP                     | No  | Yes | 161      |
+| SNMP Trap                | Yes | Yes | 162      |
+| HTTPS                    | Yes | No  | 443      |
+| Syslog                   | No  | Yes | 514      |
+| NFS                      | No  | Yes | 944      |
 
