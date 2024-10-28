@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: new-app-container-1
-        image: nginx
+        image: kishalayb18/page_kishalay:v1
         ports:
         - containerPort: 80
         imagePullPolicy: Always
