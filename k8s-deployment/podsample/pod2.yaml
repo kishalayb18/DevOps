@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod2
+  labels:
+    app: MyApp
+    env: green
+spec:
+  containers:
+  - name: nginx
+    image: kishalayb18/page_kishalay:v1
+    ports:
+    - containerPort: 80
+
