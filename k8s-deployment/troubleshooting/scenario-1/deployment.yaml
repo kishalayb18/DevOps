@@ -18,7 +18,7 @@ spec:
         image: nginx:latest
         resources:
           requests:
-            cpu: "1Gi"
+            cpu: "500m"
             memory: "750Mi"
           limits:
             cpu: "1Gi"
