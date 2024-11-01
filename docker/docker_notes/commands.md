@@ -152,7 +152,8 @@ docker run -d <image>
 docker run -d --name <container-name> <image-name>  
 ```
 
-### Running container on specific port  
+### Running container on specific port
+
 ```
 docker run -d -p <host_port>:<container_port> --name <container-name> <image-name>  
 ```
