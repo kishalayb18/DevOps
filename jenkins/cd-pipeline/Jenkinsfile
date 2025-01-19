@@ -1,0 +1,129 @@
+pipeline {
+    agent {
+        kubernetes {
+            label 'jenkins-master-deploy'
+            yamlFile './build-spec.yaml'
+        }
+    }
+
+    environment {
+        CHART_VERSION = '4.3.10'
+    }
+
+    parameters {
+        choice(name: INSTANCE, choices: ['NONE', 'csp', 'cse', 'csf', 'gcs'], description: 'The instance to be deployed')
+    }
+
+    stages {
+        stage("Validate YAML") {
+            steps {
+                container("yq") {
+                    sh '''
+                        for value in $(ls -1 ./default); do
+                            yq e 'true' ./default/$value > /dev/null
+                        done
+                    '''
+                }
+            }
+        }
+
+        stage ("Lint Helm Charts") {
+            steps {
+                container("helm-kubectl") {
+                    sh '''
+                        export HOME=\$PWD
+                        kubectl version
+                        kubectl cluster-info
+                        helm version
+
+                        helm repo add jenkins https://charts.jenkins.io
+                        helm repo update
+
+                        helm fetch jenkins/jenkins --version ${env.CHART_VERSION} --untar --untardir ./stable
+
+                        for value in \$(ls -1 ./default); do
+                            helm lint ./stable/jenkins -f "./common.yaml" -f "./default/\$value"
+                        done
+                    '''
+                }
+            }
+        }
+
+        stage("Dry run Helm") {
+            environment {
+                KUBECONFIG = credentials('devops-kubeconfig')
+            }
+
+            when {
+                expression {
+                    params.INSTANCE != 'NONE' && params.INSTANCE != null
+                }
+            }
+
+            steps {
+                container("helm-kubectl") {
+                    sh """
+                        helm repo add jenkins https://charts.jenkins.io
+                        helm repo update
+
+                        for value in \$(ls -1 ./default/${params.INSTANCE}.yaml); do
+                            filename = \$(basename -- "\$value")
+                            clean = \${filename%.*}
+
+
+                            helm upgrade --dry-run \$clean -i -f "./common.yaml" -f "\$value" -n jenkins-namespace jenkins/jenkins --version "${env.CHART_VERSION}"
+                        done
+                    """
+                }
+            }
+        }
+
+        stage("Helm Deploy") {
+            environment {
+                KUBECONFIG = credentials('devops-kubeconfig')
+            }
+
+            when {
+                expression {
+                    params.INSTANCE != 'NONE' && params.INSTANCE != null
+                }
+                branch 'master'
+            }
+
+            steps {
+                container("helm-kubectl") {
+                    sh """
+                        helm repo add jenkins https://charts.jenkins.io
+                        helm repo update
+
+                        for value in \$(ls -1 ./default/${params.INSTANCE}.yaml); do
+                            filename = \$(basename -- "\$value")
+                            clean = \${filename%.*}
+
+
+                            helm upgrade \$clean -i \
+                            -f "./common.yaml" \
+                            -f "\$value" \
+                            -n jenkins-namespace \
+                            jenkins/jenkins \
+                            --version ${env.CHART_VERSION}
+                        done
+                    """
+                }
+            }
+        }
+    }
+
+    post {
+        failure {
+            script {
+                if (env.BRANCH_NAME == 'master') {
+                    office365connectorSend webhookURL: 'https://<>'
+                    color: '#ff0001'
+                    message: "${env.JOB_NAME} ${env.BUILD_NUMBER} failed"
+                    status: 'Failed'
+                }
+            }
+        }
+    }
+}
