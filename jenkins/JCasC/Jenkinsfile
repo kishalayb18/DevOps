@@ -1,0 +1,75 @@
+pipeline{
+
+    agent{
+        kubernetes {
+            yamlFile './build-spec.yml'
+        }
+    }
+
+    stages{
+        stage("Checkout") {
+            steps{
+                git (
+                    url: "https://",
+                    branch: "feature/new",
+                    credentialsId: "github",
+                    changelog: true,
+                    poll: true,
+                )
+            }
+            post{
+                success{
+                    echo "Code cloning successful"
+                }
+                failure{
+                    echo "Code cloning failed"
+                }
+            }
+        }
+
+        stage ('Configmap Deploy') {
+            environment {
+                KUBECONFIG = credentials('kubeconfig')
+            }
+
+            steps {
+                script {
+                    container ("wrk") {
+                        sh '''
+                        kubectl get cm -n jcasc
+                        kubectl create configmap casc-configmap --from-file=./jenkins.yaml --dry-run -o yaml | kubectl apply -f -
+                        echo 'updating'
+                        sleep 60s
+
+                        '''
+                    }
+                }
+            }
+        }
+
+        stage ("Apply JCasC") {
+            steps {
+                script {
+                    container("jenkins") {
+                        sh '''
+                        ls
+                        curl --user 'admin:<pat>' --data-urlencode "script@script.groovy" http://192.160.35.163:32000/scriptText
+
+                        '''
+                    }
+                }
+            }
+        }
+    }
+    post{
+        always{
+            echo "completed"
+        }
+        success{
+            echo "==================== successful==================="
+        }
+        failure{
+            echo "======================= failed to apply casc ============================="
+        }
+    }
+}

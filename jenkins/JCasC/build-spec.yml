@@ -1,0 +1,9 @@
+spec:
+  containers:
+    - name: wrk
+      image:  kishalayb18/wrk
+    - name:  jenkins
+      image:  kishalayb18/jenkins
+      command:
+        - cat
+      tty: true
