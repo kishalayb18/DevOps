@@ -3,6 +3,9 @@ kind: ResourceQuota
 metadata:
   name: resource-quota-sample
   namespace: tm2
+kind: Namespace
+metadata:
+  name: wrk
 spec:
   hard:
     pods: "10"

@@ -7,6 +7,8 @@ helm repo update
 helm install vault hashicorp/vault --set "server.dev.enabled=true"
 kubectl get pods
 
+https://developer.hashicorp.com/vault/docs
+
 Initialize Vault:
 kubectl exec -it $VAULT_POD -- vault operator init
 

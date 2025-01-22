@@ -18,8 +18,15 @@ spec:
         image: nginx:latest
         resources:
           requests:
-            cpu: "100m"
-            memory: "100Mi"
+            cpu: "500m"
+            memory: "750Mi"
           limits:
-            cpu: "200m"
-            memory: "200Mi"
+            cpu: "1Gi"
+            memory: "1Gi"
+        volumeMounts:
+          - name:  sit-volumeclaim
+            mountPath: /data
+      volumes:
+        - name: sit-volumeclaim
+          persistentVolumeClaim:
+            claimName: sit-pvc 
