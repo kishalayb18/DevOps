@@ -1,0 +1,166 @@
+pipeline {
+    agent {
+        kubernetes {
+            yamlFile './build-spec.yml'
+        }
+    }
+    parameters {
+        choice(name: 'TYPE', choices: ['NONE', 'deploy', 'delete'], description: 'Deploy or delete registry controller')
+        choice(name: 'NAMESPACE', choices: ['registry-controller'], description: 'Select namespace to deploy to')
+        choice(name: 'CLUSTER', choices: ['build-cluster', 'test-cluster-1'], description: 'Select the Cluster')
+    }
+    environment {
+        selectedNamespace = ''
+        clusterCredential = ''
+    }
+    stages {
+        stage("Prepare Certificate") {
+            steps {
+                container("helm-kubectl") {
+                    sh '''
+                    apk add openssl
+                    chmod +x ./gen-cert.sh
+                    ./gen-cert.sh
+                    '''
+                }
+            }
+        }
+
+        stage("Lint Helm charts") {
+            steps {
+                container("helm-kubectl") {
+                    sh 'helm lint ./deploy/helm/kubernetes-registry-controller/'
+                }
+            }
+        }
+
+        stage("Build Registry Controller Image") {
+            when {
+                expression { params.TYPE == 'deploy' }
+            }
+            steps {
+                container("podman") {
+                    sh 'podman build . -t docker.artifactory.onbase.net/fd/registry-controller:1.0'
+                }
+            }
+        }
+
+        stage("Push Registry Controller Images") {
+            environment {
+                artifactory = credentials("artifactory_access_token")
+            }
+            when {
+                expression { params.TYPE == 'deploy' }
+            }
+            steps {
+                script {
+                    pushArtifactoryArtifact("docker.artifactory.onbase.net/fd/registry-controller:1.0")
+                }
+            }
+        }
+        
+        stage("selectCluster") {
+            steps {
+                script {
+                    def selectedCluster = params.CLUSTER
+                    selectCluster(selectedCluster)
+                    echo "The selected cluster is ${selectedCluster}, the corresponding credential is ${clusterCredential}"
+                }
+            }
+        }
+
+        stage("Validate Namespace") {
+            environment {
+                KUBECONFIG = credentials("${clusterCredential}")
+            }
+            steps {
+                container("helm-kubectl") {
+                    script {
+                        sh '''
+                        kubectl version
+                        kubectl get nodes
+                        '''
+                        selectedNamespace = params.NAMESPACE
+                        validateNamespace(selectedNamespace)
+                        echo "VALIDATION SUCCESSFUL"
+                    }
+                }
+            }
+        }
+
+        stage("Deploy/Delete Registry Controller Helm Chart") {
+            environment {
+                KUBECONFIG = credentials("${clusterCredential}")
+            }
+            when {
+                expression {params.TYPE != 'NONE' && env.BRANCH_NAME == 'master'}
+            }
+            steps {
+                container("helm-kubectl") {
+                    script {
+                        if (params.TYPE == 'deploy') {
+                            sh '''
+                            kubectl version
+                            kubectl cluster-info
+                            kubectl get nodes
+                            '''
+                            sh "helm upgrade --install registry-controller ./deploy/helm/kubernetes-registry-controller/ -f ./deploy/helm/kubernetes-registry-controller/values.yaml --namespace ${selectedNamespace}"
+                        } else if (params.TYPE == 'delete') {
+                            sh '''
+                            kubectl version
+                            kubectl cluster-info
+                            '''
+                            sh "helm uninstall registry-controller --namespace ${selectedNamespace}"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+def pushArtifactoryArtifact(String artifact) {
+    container('podman') {
+        sh """
+        JFROG_CLI_OFFER_CONFIG=false
+        JFROG_CLI_BUILD_NAME="${env.JOB_NAME}"
+        JFROG_CLI_BUILD_NUMBER="${env.BUILD_NUMBER}"
+        JFROG_CLI_BUILD_URL="${env.BUILD_URL}"
+        CI=true
+        JFROG_URL="https://artifactory.onbase.net/artifactory"
+
+        podman login -u ${env.artifactory_USR} -p ${env.artifactory_PSW} docker.artifactory.onbase.net
+
+        jfrog rt podman-push ${artifact} docker-local \
+        --url ${env.JFROG_URL} \
+        --skip-login \
+        --access-token ${env.artifactory_PSW}
+        """
+    }
+}
+
+def validateNamespace(String namespace) {
+    script {
+        echo "Selected Namespace: ${namespace}"
+        def namespaceExists = sh(script: "kubectl get namespace ${namespace}", returnStatus: true)
+        if (namespaceExists == 0)  {
+            echo "Namespace '${namespace}' exists."
+        } else {
+            error "Namespace '${namespace}' does not exist"
+        }
+    }
+}
+
+def selectCluster(clusterName) {
+    switch(clusterName) {
+        case 'build-cluster':
+            clusterCredential = "build_kubeconfig"
+            break
+        case 'test-cluster-1':
+            clusterCredential = "test-cluster-1"
+            break
+        default:
+            echo "Wrong cluster name: ${clusterName}"
+    }
+}
+

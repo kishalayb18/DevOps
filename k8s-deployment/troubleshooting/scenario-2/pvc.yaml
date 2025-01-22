@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: sit-pvc
-  namespace: wrk
+  namespace: tm2
 spec:
   accessModes:
     - ReadWriteOnce

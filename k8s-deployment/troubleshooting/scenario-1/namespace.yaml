@@ -1,13 +1,8 @@
 apiVersion: v1
-kind: Namespace
-metadata:
-  name: wrk
----
-apiVersion: v1
 kind: ResourceQuota
 metadata:
   name: resource-quota-sample
-  namespace: wrk
+  namespace: tm2
 spec:
   hard:
     pods: "10"
