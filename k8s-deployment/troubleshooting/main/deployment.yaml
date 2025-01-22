@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-deployment
+  namespace: wrk
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: sample-app
+  template:
+    metadata:
+      labels:
+        app: sample-app
+    spec:
+      containers:
+      - name: sample-container
+        image: nginx:latest
+        resources:
+          requests:
+            cpu: "500m"
+            memory: "750Mi"
+          limits:
+            cpu: "1Gi"
+            memory: "1Gi"
+        volumeMounts:
+          - name:  sit-volumeclaim
+            mountPath: /data
+      volumes:
+        - name: sit-volumeclaim
+          persistentVolumeClaim:
+            claimName: sit-pvc 

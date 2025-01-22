@@ -1,0 +1,16 @@
+spec:
+  containers:
+  - name: jnlp
+    image: docker.artifactory.onbase.net/jenkins/inbound-agent:alpine
+  - name: helm-kubectl
+    image: docker.artifactory.onbase.net/dtzar/helm-kubectl:3.10.1
+    command:
+      - cat
+    tty: true
+  - name: podman
+    image: docker.artifactory.onbase.net/library/podman:4.4.2
+    command:
+      - cat
+    tty: true
+    securityContext:
+      privileged: true

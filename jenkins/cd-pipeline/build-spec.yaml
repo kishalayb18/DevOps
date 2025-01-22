@@ -1,1 +1,14 @@
 spec:
+  containers:
+    - name: jnlp
+      image: jenkins/inbound-agent:alpine
+    - name: helm-kubectl
+      image: helm-kubectl
+      command:
+        - cat
+      tty: true
+    - name: yq
+      image: yq:4.5.1
+      command:
+        - cat
+      tty: true

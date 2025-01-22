@@ -1,8 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sample-deployment
-  namespace: wrk
+  name: scenario1
+  namespace: tm2
 spec:
   replicas: 3
   selector:

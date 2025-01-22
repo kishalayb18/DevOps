@@ -11,3 +11,4 @@ spec:
     image: kishalaypage:v1
     ports:
     - containerPort: 8080
+    imagePullPolicy: Never

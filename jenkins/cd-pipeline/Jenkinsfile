@@ -1,127 +1,269 @@
 pipeline {
     agent {
         kubernetes {
-            label 'jenkins-master-deploy'
-            yamlFile './build-spec.yaml'
+            label 'jenkins-masters-deploy'
+            yamlFile './build-spec.yml'
         }
     }
-
     environment {
         CHART_VERSION = '4.3.10'
     }
 
     parameters {
-        choice(name: INSTANCE, choices: ['NONE', 'csp', 'cse', 'csf', 'gcs'], description: 'The instance to be deployed')
+        choice(name: 'INSTANCE', choices: ['NONE', 'all', 'test', 'uat', 'csp', 'devops', 'healthcarecs', 'ag', 'autotest', 'capture', 'captureonbase', 'ccm', 'cloud-platform', 'configuration', 'cse', 'csf', 'experience', 'gcs', 'horizontal', 'ibpa', 'insurance', 'mca', 'onbase-soatf', 'perceptive', 'research-development', 'pc', 'anydoc'], description: 'The Jenkins instance to update')
+        choice(name: 'CasC', choices: ['NONE', 'deploy', 'update'], description: 'Update the Jenkins config')
     }
 
     stages {
-        stage("Validate YAML") {
+
+        stage("Install envsubst") {
+            steps {
+                container("helm-kubectl") {
+                    sh "apk add --no-cache gettext"
+                }
+            }
+        }
+
+        stage("Validate YAML syntax") {
             steps {
                 container("yq") {
                     sh '''
-                        for value in $(ls -1 ./default); do
-                            yq e 'true' ./default/$value > /dev/null
-                        done
+                    for value in $(ls -1 ./default); do
+                        yq e 'true' ./default/$value > /dev/null
+                    done
+
+                    for value in $(ls -1 ./jenkins); do
+                        yq e 'true' ./jenkins/$value > /dev/null
+                    done
+
+                    for value in $(ls -1 ./jenkins-test); do
+                        yq e 'true' ./jenkins-test/$value > /dev/null
+                    done
                     '''
                 }
             }
         }
 
-        stage ("Lint Helm Charts") {
+        stage("Prepare Config Files with envsubst") {
+            when {
+                expression { params.INSTANCE != 'NONE' }
+            }
             steps {
                 container("helm-kubectl") {
-                    sh '''
-                        export HOME=\$PWD
-                        kubectl version
-                        kubectl cluster-info
-                        helm version
+                    script {
+                        def instances = ['test', 'uat', 'csp', 'devops', 'healthcarecs', 'ag', 'autotest', 'capture', 'captureonbase', 'ccm', 'cloud-platform', 'configuration', 'cse', 'csf', 'experience', 'gcs', 'horizontal', 'ibpa', 'insurance', 'mca', 'onbase-soatf', 'perceptive', 'research-development', 'pc', 'anydoc']
 
-                        helm repo add jenkins https://charts.jenkins.io
-                        helm repo update
-
-                        helm fetch jenkins/jenkins --version ${env.CHART_VERSION} --untar --untardir ./stable
-
-                        for value in \$(ls -1 ./default); do
-                            helm lint ./stable/jenkins -f "./common.yaml" -f "./default/\$value"
-                        done
-                    '''
+                        if (params.INSTANCE == 'all') {
+                            for (instance in instances) {
+                                sh """
+                                export INSTANCE=${instance}
+                                envsubst '\$INSTANCE' < ./casc/vsphere.yaml | sed -e 's/PLACEHOLDER_JENKINS_URL/^\${JENKINS_URL}/g' \
+                                -e 's/PLACEHOLDER_NODE_NAME/^\${NODE_NAME}/g' \
+                                -e 's/PLACEHOLDER_JNLP_SECRET/^\${JNLP_SECRET}/g' > ./casc/vsphere-updated-${instance}.yaml
+                                """
+                            }
+                        } else {
+                            sh """
+                            export INSTANCE=${params.INSTANCE}
+                            envsubst '\$INSTANCE' < ./casc/vsphere.yaml | sed -e 's/PLACEHOLDER_JENKINS_URL/^\${JENKINS_URL}/g' \
+                            -e 's/PLACEHOLDER_NODE_NAME/^\${NODE_NAME}/g' \
+                            -e 's/PLACEHOLDER_JNLP_SECRET/^\${JNLP_SECRET}/g' > ./casc/vsphere-updated-${params.INSTANCE}.yaml
+                            """
+                        }
+                    }
                 }
             }
         }
 
-        stage("Dry run Helm") {
+        stage("Lint Helm charts") {
+            when {
+                expression { params.INSTANCE != 'NONE' }
+            }
             environment {
                 KUBECONFIG = credentials('devops-kubeconfig')
             }
-
-            when {
-                expression {
-                    params.INSTANCE != 'NONE' && params.INSTANCE != null
-                }
-            }
-
             steps {
                 container("helm-kubectl") {
-                    sh """
-                        helm repo add jenkins https://charts.jenkins.io
-                        helm repo update
+                    script {
+                        def instances = params.INSTANCE == 'all' ? ['test', 'uat', 'csp', 'devops', 'healthcarecs', 'ag', 'autotest', 'capture', 'captureonbase', 'ccm', 'cloud-platform', 'configuration', 'cse', 'csf', 'experience', 'gcs', 'horizontal', 'ibpa', 'insurance', 'mca', 'onbase-soatf', 'perceptive', 'research-development', 'pc', 'anydoc'] : [params.INSTANCE]
+                        
+                        for (instance in instances) {
+                            sh """
+                            helm repo add jenkins https://charts.jenkins.io
+                            helm repo update
+                            helm fetch jenkins/jenkins --version ${env.CHART_VERSION} --untar --untardir ./stable
 
-                        for value in \$(ls -1 ./default/${params.INSTANCE}.yaml); do
-                            filename = \$(basename -- "\$value")
-                            clean = \${filename%.*}
+                            for value in \$(ls -1 ./jenkins); do
+                                helm lint ./stable/jenkins -f "./common.yaml" -f "./jenkins/\$value" -f "./casc/kubernetes.yaml" -f "./casc/vsphere-updated-${instance}.yaml" -f "./casc/credential.yaml"
+                            done
 
+                            for value in \$(ls -1 ./default); do
+                                helm lint ./stable/jenkins -f "./common.yaml" -f "./default/\$value" -f "./casc/kubernetes.yaml" -f "./casc/vsphere-updated-${instance}.yaml" -f "./casc/credential.yaml"
+                            done
 
-                            helm upgrade --dry-run \$clean -i -f "./common.yaml" -f "\$value" -n jenkins-namespace jenkins/jenkins --version "${env.CHART_VERSION}"
-                        done
-                    """
+                            for value in \$(ls -1 ./jenkins-test); do
+                                helm lint ./stable/jenkins -f "./common.yaml" -f "./jenkins-test/\$value" -f "./casc/kubernetes.yaml" -f "./casc/vsphere-updated-${instance}.yaml" -f "./casc/credential.yaml"
+                            done
+                            """
+                        }
+                    }
                 }
             }
         }
 
-        stage("Helm Deploy") {
+        stage("Jenkins Master Dry Run") {
             environment {
                 KUBECONFIG = credentials('devops-kubeconfig')
             }
-
             when {
-                expression {
-                    params.INSTANCE != 'NONE' && params.INSTANCE != null
-                }
-                branch 'master'
+                expression { params.INSTANCE != 'NONE' && params.INSTANCE != null }
             }
+            steps {
+                container("helm-kubectl") {
+                    script {
+                        def instances = params.INSTANCE == 'all' ? ['test', 'uat', 'csp', 'devops', 'healthcarecs', 'ag', 'autotest', 'capture', 'captureonbase', 'ccm', 'cloud-platform', 'configuration', 'cse', 'csf', 'experience', 'gcs', 'horizontal', 'ibpa', 'insurance', 'mca', 'onbase-soatf', 'perceptive', 'research-development', 'pc', 'anydoc'] : [params.INSTANCE]
 
+                        for (instance in instances) {
+                            sh """
+                            helm repo add jenkins https://charts.jenkins.io
+                            helm repo update
+
+                            for value in \$(ls -1 ./jenkins/${instance}.yaml); do
+                                filename=\$(basename -- "\$value")
+                                clean=\${filename%.*}
+
+                                envsubst < "\$value" | helm upgrade --dry-run \$clean -i -f "./common.yaml" -f "\$value" \
+                                    -f "./casc/kubernetes.yaml" -f "./casc/vsphere-updated-${instance}.yaml" -f "./casc/credential.yaml" \
+                                    --namespace jenkins jenkins/jenkins --version "${env.CHART_VERSION}"
+                            done
+							
+							for value in \$(ls -1 ./default/${instance}.yaml); do
+                                filename=\$(basename -- "\$value")
+                                clean=\${filename%.*}
+
+                                envsubst < "\$value" | helm upgrade --dry-run \$clean -i -f "./common.yaml" -f "\$value" \
+                                    -f "./casc/kubernetes.yaml" -f "./casc/vsphere-updated-${instance}.yaml" -f "./casc/credential.yaml" \
+                                    --namespace default jenkins/jenkins --version "${env.CHART_VERSION}"
+							done
+							
+							for value in \$(ls -1 ./jenkins-test/${instance}.yaml); do
+                                filename=\$(basename -- "\$value")
+                                clean=\${filename%.*}
+
+                                envsubst < "\$value" | helm upgrade --dry-run \$clean -i -f "./common.yaml" -f "\$value" \
+                                    -f "./casc/kubernetes.yaml" -f "./casc/vsphere-updated-${instance}.yaml" -f "./casc/credential.yaml" \
+                                    --namespace jenkins-test jenkins/jenkins --version "${env.CHART_VERSION}"
+							done
+							
+                            """
+                        }
+                    }
+                }
+            }
+        }
+
+        stage("Deploy Jenkins Master") {
+            environment {
+                KUBECONFIG = credentials('devops-kubeconfig')
+            }
+            when {
+                expression { params.INSTANCE != 'NONE' && params.CasC == 'deploy' }
+            }
+            steps {
+                container("helm-kubectl") {
+                    script {
+                        def instances = params.INSTANCE == 'all' ? ['test', 'uat', 'csp', 'devops', 'healthcarecs', 'ag', 'autotest', 'capture', 'captureonbase', 'ccm', 'cloud-platform', 'configuration', 'cse', 'csf', 'experience', 'gcs', 'horizontal', 'ibpa', 'insurance', 'mca', 'onbase-soatf', 'perceptive', 'research-development', 'pc', 'anydoc'] : [params.INSTANCE]
+
+                        for (instance in instances) {
+                            sh """
+                            helm repo add jenkins https://charts.jenkins.io
+                            helm repo update
+
+                            for value in \$(ls -1 ./jenkins/${instance}.yaml); do
+                                filename=\$(basename -- "\$value")
+                                clean=\${filename%.*}
+
+                                envsubst < "\$value" | helm upgrade \$clean -i -f "./common.yaml" -f "\$value" \
+                                    -f "./casc/kubernetes.yaml" -f "./casc/vsphere-updated-${instance}.yaml" -f "./casc/credential.yaml" \
+                                    --namespace jenkins jenkins/jenkins --version "${env.CHART_VERSION}"
+                            done
+							
+							for value in \$(ls -1 ./default/${instance}.yaml); do
+                                filename=\$(basename -- "\$value")
+                                clean=\${filename%.*}
+
+                                envsubst < "\$value" | helm upgrade \$clean -i -f "./common.yaml" -f "\$value" \
+                                    -f "./casc/kubernetes.yaml" -f "./casc/vsphere-updated-${instance}.yaml" -f "./casc/credential.yaml" \
+                                    --namespace default jenkins/jenkins --version "${env.CHART_VERSION}"
+                            done
+							
+							    for value in \$(ls -1 ./jenkins-test/${instance}.yaml); do
+                                filename=\$(basename -- "\$value")
+                                clean=\${filename%.*}
+
+                                envsubst < "\$value" | helm upgrade \$clean -i -f "./common.yaml" -f "\$value" \
+                                    -f "./casc/kubernetes.yaml" -f "./casc/vsphere-updated-${instance}.yaml" -f "./casc/credential.yaml" \
+                                    --namespace jenkins-test jenkins/jenkins --version "${env.CHART_VERSION}"
+                            done
+                            """
+                        }
+                    }
+                }
+            }
+        }
+
+        stage("deploy JCasC to all") {
+            environment {
+                KUBECONFIG = credentials('devops-kubeconfig')
+            }
+            when {
+                expression { params.CasC == 'update' && params.INSTANCE == 'all' }
+            }
             steps {
                 container("helm-kubectl") {
                     sh """
-                        helm repo add jenkins https://charts.jenkins.io
-                        helm repo update
+                    jenkinstestfolder="jenkins-test"
+                    defaultfolder="default"
+                    jenkinsfolder="jenkins"
+                    
+                    # Process jenkins-test files in jenkins-test namespace
+                    for file in \${jenkinstestfolder}/*.yaml; do
+                        filename=\$(basename "\$file")
+                        clean=\${filename%.*}
+                        echo "Deploying \$clean in jenkins-test namespace"
+                        envsubst < "\$file" | helm upgrade --dry-run \$clean -i -f "./common.yaml" -f "./casc/kubernetes.yaml" -f "./casc/vsphere-updated.yaml" -f "./casc/credential.yaml" --namespace jenkins-test jenkins/jenkins --version "${env.CHART_VERSION}"
+                    done
 
-                        for value in \$(ls -1 ./default/${params.INSTANCE}.yaml); do
-                            filename = \$(basename -- "\$value")
-                            clean = \${filename%.*}
+                    # Process default files in default namespace
+                    for file in \${defaultfolder}/*.yaml; do
+                        filename=\$(basename "\$file")
+                        clean=\${filename%.*}
+                        echo "Deploying \$clean in default namespace"
+                        envsubst < "\$file" | helm upgrade --dry-run \$clean -i -f "./common.yaml" -f "./casc/kubernetes.yaml" -f "./casc/vsphere-updated.yaml" -f "./casc/credential.yaml" --namespace default jenkins/jenkins --version "${env.CHART_VERSION}"
+                    done
 
-
-                            helm upgrade \$clean -i \
-                            -f "./common.yaml" \
-                            -f "\$value" \
-                            -n jenkins-namespace \
-                            jenkins/jenkins \
-                            --version ${env.CHART_VERSION}
-                        done
+                    # Process jenkins files in jenkins namespace
+                    for file in \${jenkinsfolder}/*.yaml; do
+                        filename=\$(basename "\$file")
+                        clean=\${filename%.*}
+                        echo "Deploying \$clean in jenkins namespace"
+                        envsubst < "\$file" | helm upgrade --dry-run \$clean -i -f "./common.yaml" -f "./casc/kubernetes.yaml" -f "./casc/vsphere-updated.yaml" -f "./casc/credential.yaml" --namespace jenkins jenkins/jenkins --version "${env.CHART_VERSION}"
+                    done
                     """
                 }
             }
         }
     }
+	
 
     post {
         failure {
             script {
                 if (env.BRANCH_NAME == 'master') {
-                    office365connectorSend webhookURL: 'https://<>'
-                    color: '#ff0001'
-                    message: "${env.JOB_NAME} ${env.BUILD_NUMBER} failed"
-                    status: 'Failed'
+                    office365ConnectorSend webhookUrl: 'https://sample',
+                    color: '#ff0000',
+                    message: "${env.JOB_NAME} ${env.BUILD_NUMBER} failed to build.",
+                    status: 'Failure'
                 }
             }
         }
