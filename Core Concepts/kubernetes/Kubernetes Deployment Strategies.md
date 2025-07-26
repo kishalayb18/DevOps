@@ -47,4 +47,4 @@
  - How: Use unique tags for container images and manage routing through Kubernetes services.
  - Why: Simplifies rollback and ensures complete traceability.
 
-![Kubernetes Deployment Strategies](https://github.com/kishalayb18/DevOps/blob/kishalayb18-patch-1/Core%20Concepts/png/Kubernetes%20deployment%20Strategies.png)
+![Kubernetes Deployment Strategies](../png/Kubernetes%20deployment%20Strategies.png)
