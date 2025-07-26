@@ -8,7 +8,7 @@ BASIC CONCEPTS OF K8S:
 4. Namespaces: Policies are typically applied within a specific namespace, helping to organize and manage resources efficiently.
 
 ## Sample Network Policy Workflow Diagram
-![Kubernetes Deployment Strategies](https://github.com/kishalayb18/DevOps/blob/kishalayb18-patch-1/Core%20Concepts/png/networkpolicy.jfif)
+![Kubernetes Deployment Strategies](../png/networkpolicy.jfif)
 
 #### 1. Allow frontend to backend traffic
 This policy allows traffic from pods labeled `app: frontend` to reach pods labeled `app: backend`.

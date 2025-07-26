@@ -137,5 +137,5 @@ kubectl patch service myapp-service -p '{"spec":{"selector":{"version":"blue"}}}
 ```
 
 ## Database Migrations with BG
-Database migrations in a blue-green deployment scenario are challenging because you need to maintain compatibility between the two versions of your application (blue and green) and the database schema. What we want is to perform these migrations without downtime and ensure both versions can operate correctly during the transition. which is damn easy :) (maybe)
-You can use any of your strategies. For database changes, you can use a migration tool that supports reversible migrations. *Run migrations before deploying the green version
+Database migrations in a blue-green deployment scenario are challenging because you need to maintain compatibility between the two versions of your application (blue and green) and the database schema. What we want is to perform these migrations without downtime and ensure both versions can operate correctly during the transition. which is simple
+You can use any of your strategies. For database changes, you can use a migration tool that supports reversible migrations. Run migrations before deploying the green version

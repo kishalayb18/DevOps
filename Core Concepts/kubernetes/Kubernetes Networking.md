@@ -49,5 +49,5 @@ Let's explore the key concepts and components of Kubernetes networking:
  - CoreDNS resolves DNS queries for Kubernetes Services and Pods.
 
 ## Workflow Diagram
-![Kubernetes Deployment Strategies](https://github.com/kishalayb18/DevOps/blob/kishalayb18-patch-1/Core%20Concepts/png/networking.gif)
+![Kubernetes Deployment Strategies](../png/networking.gif)
 
