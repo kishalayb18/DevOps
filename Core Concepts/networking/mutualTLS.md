@@ -6,6 +6,8 @@ The fundamentals of mutual TLS (mTLS) and how it enhances security for service-t
 
 Mutual TLS (mTLS) is an extension of standard TLS that enforces authentication for both the client and server using X.509 certificates.
 
+![Mutual TLS](../png/mutualTLS.jpg)
+
 ### Standard TLS Handshake:
 
 1. Client sends a Client Hello.
@@ -34,6 +36,9 @@ The mTLS handshake extends the TLS flow with certificate exchange on both sides:
 4. Client Certificate: Client presents its certificate.
 5. Client Verification: Server validates the client’s certificate.
 6. Secure Channel Established: Encrypted data exchange begins.
+
+![Mutual TLS Flow](../png/mutualTLSWorkflow.png)
+
 
 ## Key Benefits of mTLS in Kubernetes
 
