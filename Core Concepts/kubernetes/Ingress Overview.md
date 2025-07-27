@@ -113,6 +113,9 @@ Benefits:
 
 Clients send HTTP(S) requests to the cluster’s external endpoint. The Ingress controller intercepts these requests, matches them against Ingress rules, and forwards them to the appropriate Service, which then load-balances to the backend Pods.
 
+
+![Ingress Traffic Flow](../png/ingress.png)
+
 ---
 
 ## Cloud-based Ingress Controllers
