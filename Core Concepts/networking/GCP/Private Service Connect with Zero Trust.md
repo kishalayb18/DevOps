@@ -42,7 +42,7 @@ This design includes:
    - The ILB forwards the request to the actual backend service.
 
 
-![PSC Zero Trust Architecture](../png/psc_zt.png)
+![PSC Zero Trust Architecture](../../png/psc_zt.png)
 
 ## Software-Defined Networking in PSC
 

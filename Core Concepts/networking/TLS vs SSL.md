@@ -2,7 +2,7 @@
 
 ## What is the difference
 
-SSL (Secure Sockets Layer) and TLS (Transport Layer Security) are cryptographic protocols designed to provide secure communication over a network. 
+SSL (Secure Sockets Layer) and TLS (Transport Layer Security) are cryptographic protocols designed to provide secure communication over a network. <br><br>
 
 TLS is the successor to SSL and has addressed its vulnerabilities. SSL was used for a long time but is now deprecated due to its security flaws.
 
