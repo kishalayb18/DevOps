@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: fe-ns
+  labels:
+    ns-name: fe-ns
+
+---
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: be-ns
+  labels:
+    ns-name: be-ns
+
+---
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: db-ns
+  labels:
+    ns-name: db-ns

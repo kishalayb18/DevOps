@@ -1,12 +1,12 @@
 # Secops Project :  cluster governance rules using kyverno
 
-- 1 [Problem statement](https://github.com/kishalayb18/DevOps/blob/feature/kubernetes/k8s-deployment/kyverno/kyverno.md#problem-statement)
-- 2 [What is kyverno](https://github.com/kishalayb18/DevOps/blob/feature/kubernetes/k8s-deployment/kyverno/kyverno.md#what-is-kyverno)
-- 3 [Workflow](https://github.com/kishalayb18/DevOps/blob/feature/kubernetes/k8s-deployment/kyverno/kyverno.md#workflow)
-- 4 [Scope of this project](https://github.com/kishalayb18/DevOps/blob/feature/kubernetes/k8s-deployment/kyverno/kyverno.md#scope-of-this-project)
-- 5 [Commands](https://github.com/kishalayb18/DevOps/blob/feature/kubernetes/k8s-deployment/kyverno/kyverno.md#commands)
-- 6 [Tools leveraged](https://github.com/kishalayb18/DevOps/blob/feature/kubernetes/k8s-deployment/kyverno/kyverno.md#tools-leveraged)
-- 7 [Reference links](https://github.com/kishalayb18/DevOps/blob/feature/kubernetes/k8s-deployment/kyverno/kyverno.md#reference-links)
+- 1 [Problem statement](#problem-statement)
+- 2 [What is kyverno](#what-is-kyverno)
+- 3 [Workflow](#workflow)
+- 4 [Scope of this project](#scope-of-this-project)
+- 5 [Commands](#commands)
+- 6 [Tools leveraged](#tools-leveraged)
+- 7 [Reference links](#reference-links)
 
 ### Problem statement
 

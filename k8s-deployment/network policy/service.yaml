@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  namespace: fe-ns
+spec:
+  selector:
+    app: frontend
+  ports:
+  - port: 80
+    targetPort: 80 
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+  namespace: be-ns
+spec:
+  selector:
+    app: backend
+  ports:
+  - port: 80
+    targetPort: 5678 
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: database
+  namespace: db-ns
+spec:
+  selector:
+    app: database
+  ports:
+  - port: 80
+    targetPort: 5678
