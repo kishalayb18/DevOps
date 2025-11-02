@@ -90,9 +90,3 @@ NLBs support TLS termination for TCP traffic, allowing you to offload SSL/TLS de
 #### 8. Health Checks:
 NLBs regularly perform health checks on backend targets, automatically directing traffic only to healthy instances to maintain high availability
 
-
-
-
-
-
-
