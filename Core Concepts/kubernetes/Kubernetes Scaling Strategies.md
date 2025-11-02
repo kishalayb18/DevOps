@@ -15,4 +15,4 @@ Manual scaling in Kubernetes involves adjusting the number of nodes or resources
 ### 5. Predictive Scaling in Kubernetes
 Predictive scaling stands as a transformative approach in the orchestration of cloud-native applications, allowing Kubernetes to not just react to current demands but to anticipate future needs. This forward-looking strategy harnesses the power of data analysis and machine learning to create a more dynamic, efficient, and user-oriented scaling process.
 
-![Kubernetes Deployment Strategies](../png/Kubernetes%20Scaling%20Strategies.png)
+![Kubernetes scaling Strategies](../png/Kubernetes%20Scaling%20Strategies.png)
