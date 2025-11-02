@@ -1,2 +1,3 @@
 # ignore the following folders
-diagrams/
+
+.DS_Store
