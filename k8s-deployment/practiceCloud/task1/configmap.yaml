@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: port-config
 data:
- port: "700"
- targetPort: "80"
- NodePort: "31000"
- name: "KISHALAY BHATTACHARYA"
+  port: "700"
+  targetPort: "80"
+  NodePort: "31000"
+  name: "KISHALAY BHATTACHARYA"

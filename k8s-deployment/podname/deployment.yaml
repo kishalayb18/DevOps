@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: pod-name-app
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: pod-name-app
@@ -13,7 +13,8 @@ spec:
         app: pod-name-app
     spec:
       containers:
-      - name: flask-app
-        image: your-dockerhub-username/pod-name-flask-app:latest
+      - name: podname
+        image: kishalayb18/podname:v1
+        imagePullPolicy: Always
         ports:
         - containerPort: 5000
