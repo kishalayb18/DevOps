@@ -6,6 +6,15 @@
 minikube start --vm-driver=virtualbox 
 minikube start --no-vtx-check
 ```
+```
+minikube start --driver=docker
+```
+
+Enable Ingress addon
+```
+minikube addons enable ingress
+```
+
 **from second time**
 ```
 minikube start #to resume minikube

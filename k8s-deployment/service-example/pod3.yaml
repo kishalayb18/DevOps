@@ -4,6 +4,7 @@ metadata:
   name: third-pod
   labels:
     app: MyApp
+    pod: new
 spec:
   containers:
     - name: sample-container-3
