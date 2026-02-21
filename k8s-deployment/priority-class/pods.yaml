@@ -1,0 +1,66 @@
+# pods.yaml for different priority classes
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: high-priority-pod
+  labels:
+    app: priority-demo
+    tier: high
+spec:
+  priorityClassName: high-priority
+  containers:
+  - name: web
+    image: nginx
+    resources:
+      requests:
+        cpu: "100m"
+        memory: "128Mi"
+      limits:
+        cpu: "200m"
+        memory: "256Mi"
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: medium-priority-pod
+  labels:
+    app: priority-demo
+    tier: standard
+spec:
+  priorityClassName: medium-priority
+  containers:
+  - name: web
+    image: nginx
+    resources:
+      requests:
+        cpu: "50m"
+        memory: "64Mi"
+      limits:
+        cpu: "150m"
+        memory: "128Mi"
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: low-priority-pod
+  labels:
+    app: priority-demo
+    tier: low
+spec:
+  priorityClassName: low-priority
+  containers:
+  - name: worker
+    image: busybox
+    command: ['sleep', '3600']
+    resources:
+      requests:
+        cpu: "10m"
+        memory: "32Mi"
+      limits:
+        cpu: "50m"
+        memory: "64Mi"

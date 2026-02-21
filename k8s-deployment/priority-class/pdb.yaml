@@ -1,0 +1,39 @@
+# Pod Disruption Budget 
+
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: high-pdb
+spec:
+  minAvailable: 2
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      tier: high
+  description: "Ensures at least 2 high-priority pods available; allows maximum 1 to be disrupted"
+
+---
+
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: standard-pdb
+spec:
+  maxUnavailable: 1
+  selector:
+    matchLabels:
+      tier: standard
+  description: "Allows up to 1 standard pod to be unavailable"
+
+---
+
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: low-pdb
+spec:
+  maxUnavailable: "50%"
+  selector:
+    matchLabels:
+      tier: low
+  description: "Allows up to 50% of background pods to be unavailable"
