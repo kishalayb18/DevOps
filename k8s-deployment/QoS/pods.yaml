@@ -1,0 +1,47 @@
+# Example pods demonstrating QoS classes
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: qos-guaranteed
+spec:
+  containers:
+  - name: web
+    image: nginx
+    resources:
+      requests:
+        cpu: "100m"
+        memory: "128Mi"
+      limits:
+        cpu: "100m"
+        memory: "128Mi"
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: qos-burstable
+spec:
+  containers:
+  - name: web
+    image: nginx
+    resources:
+      requests:
+        cpu: "50m"
+        memory: "64Mi"
+      limits:
+        cpu: "200m"
+        memory: "256Mi"
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: qos-besteffort
+spec:
+  containers:
+  - name: web
+    image: nginx
+    # No resource requests or limits
